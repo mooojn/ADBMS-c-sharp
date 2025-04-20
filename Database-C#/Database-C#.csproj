@@ -66,6 +66,7 @@
     <Compile Include="TableView.Designer.cs">
       <DependentUpon>TableView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Parser.cs" />
     <Compile Include="Utils\Vars.cs" />
     <EmbeddedResource Include="DatabaseView.resx">
       <DependentUpon>DatabaseView.cs</DependentUpon>

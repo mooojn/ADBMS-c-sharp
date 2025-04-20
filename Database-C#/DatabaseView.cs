@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -195,6 +196,20 @@ namespace Database_C_
 				MessageBox.Show("Table file not found.");
 			}
 		}
+
+		private void label1_Click(object sender, EventArgs e)
+		{
+
+		}
+		private void executeQueryBtn_Click(object sender, EventArgs e)
+		{
+			string query = queryBox.Text;
+			bool isTableChanged = Parser.ParseQuery(query, tableData);
+			if (isTableChanged)
+				return;
+			LoadTable();
+		}
+
 
 	}
 }

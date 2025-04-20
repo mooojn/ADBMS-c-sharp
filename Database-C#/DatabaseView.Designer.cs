@@ -34,6 +34,9 @@
 			this.tableData = new System.Windows.Forms.DataGridView();
 			this.button1 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
+			this.button4 = new System.Windows.Forms.Button();
+			this.label1 = new System.Windows.Forms.Label();
+			this.queryBox = new System.Windows.Forms.TextBox();
 			((System.ComponentModel.ISupportInitialize)(this.tableData)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -78,7 +81,7 @@
 			// 
 			// button1
 			// 
-			this.button1.Location = new System.Drawing.Point(486, 161);
+			this.button1.Location = new System.Drawing.Point(679, 83);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(181, 57);
 			this.button1.TabIndex = 10;
@@ -88,7 +91,7 @@
 			// 
 			// button3
 			// 
-			this.button3.Location = new System.Drawing.Point(690, 161);
+			this.button3.Location = new System.Drawing.Point(877, 83);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(181, 57);
 			this.button3.TabIndex = 11;
@@ -96,11 +99,41 @@
 			this.button3.UseVisualStyleBackColor = true;
 			this.button3.Click += new System.EventHandler(this.deleteBtn_Click);
 			// 
+			// button4
+			// 
+			this.button4.Location = new System.Drawing.Point(486, 172);
+			this.button4.Name = "button4";
+			this.button4.Size = new System.Drawing.Size(181, 57);
+			this.button4.TabIndex = 12;
+			this.button4.Text = "Query";
+			this.button4.UseVisualStyleBackColor = true;
+			this.button4.Click += new System.EventHandler(this.executeQueryBtn_Click);
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(156, 147);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(70, 25);
+			this.label1.TabIndex = 14;
+			this.label1.Text = "Query";
+			this.label1.Click += new System.EventHandler(this.label1_Click);
+			// 
+			// queryBox
+			// 
+			this.queryBox.Location = new System.Drawing.Point(161, 185);
+			this.queryBox.Name = "queryBox";
+			this.queryBox.Size = new System.Drawing.Size(272, 31);
+			this.queryBox.TabIndex = 13;
+			// 
 			// DatabaseView
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1764, 799);
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.queryBox);
+			this.Controls.Add(this.button4);
 			this.Controls.Add(this.button3);
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.tableData);
@@ -124,5 +157,8 @@
 		private System.Windows.Forms.DataGridView tableData;
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.Button button4;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.TextBox queryBox;
 	}
 }

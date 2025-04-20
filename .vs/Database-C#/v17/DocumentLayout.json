@@ -3,24 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\moon\\Desktop\\Database-C#\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|c:\\users\\moon\\desktop\\database-c#\\database-c#\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|solutionrelative:database-c#\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|c:\\users\\moon\\desktop\\database-c#\\database-c#\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|solutionrelative:database-c#\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|c:\\users\\moon\\desktop\\database-c#\\database-c#\\databaseview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|C:\\Users\\moon\\Desktop\\Database-C#\\database-c#\\databaseview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|solutionrelative:database-c#\\databaseview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|c:\\users\\moon\\desktop\\database-c#\\database-c#\\databaseview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|c:\\users\\moon\\desktop\\database-c#\\database-c#\\utils\\parser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|solutionrelative:database-c#\\utils\\parser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|C:\\Users\\moon\\Desktop\\Database-C#\\database-c#\\databaseview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|solutionrelative:database-c#\\databaseview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|c:\\users\\moon\\desktop\\database-c#\\database-c#\\tableview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|C:\\Users\\moon\\Desktop\\Database-C#\\database-c#\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|solutionrelative:database-c#\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|C:\\Users\\moon\\Desktop\\Database-C#\\database-c#\\tableview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|solutionrelative:database-c#\\tableview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|c:\\users\\moon\\desktop\\database-c#\\database-c#\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|solutionrelative:database-c#\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,24 +34,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
+              "Title": "Parser.cs",
+              "DocumentMoniker": "C:\\Users\\moon\\Desktop\\Database-C#\\Database-C#\\Utils\\Parser.cs",
+              "RelativeDocumentMoniker": "Database-C#\\Utils\\Parser.cs",
+              "ToolTip": "C:\\Users\\moon\\Desktop\\Database-C#\\Database-C#\\Utils\\Parser.cs",
+              "RelativeToolTip": "Database-C#\\Utils\\Parser.cs",
+              "ViewState": "AgIAAAoAAAAgZWZmZmYywCUAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-20T13:19:14.782Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "DatabaseView.cs",
               "DocumentMoniker": "C:\\Users\\moon\\Desktop\\Database-C#\\Database-C#\\DatabaseView.cs",
               "RelativeDocumentMoniker": "Database-C#\\DatabaseView.cs",
               "ToolTip": "C:\\Users\\moon\\Desktop\\Database-C#\\Database-C#\\DatabaseView.cs",
               "RelativeToolTip": "Database-C#\\DatabaseView.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAMAAAAAAAAAAAAAAAMsAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-20T12:13:53.196Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "DatabaseView.cs [Design]",
               "DocumentMoniker": "C:\\Users\\moon\\Desktop\\Database-C#\\Database-C#\\DatabaseView.cs",
               "RelativeDocumentMoniker": "Database-C#\\DatabaseView.cs",
@@ -59,13 +76,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Users\\moon\\Desktop\\Database-C#\\Database-C#\\Form1.cs",
               "RelativeDocumentMoniker": "Database-C#\\Form1.cs",
               "ToolTip": "C:\\Users\\moon\\Desktop\\Database-C#\\Database-C#\\Form1.cs",
               "RelativeToolTip": "Database-C#\\Form1.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAQwB4AAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAQwBsAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-20T12:13:16.623Z",
               "EditorCaption": ""
@@ -84,7 +101,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\moon\\Desktop\\Database-C#\\Database-C#\\Form1.cs",
               "RelativeDocumentMoniker": "Database-C#\\Form1.cs",
