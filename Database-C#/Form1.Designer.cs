@@ -35,6 +35,8 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.dbComboBox = new System.Windows.Forms.ComboBox();
 			this.button3 = new System.Windows.Forms.Button();
+			this.isUseBin = new System.Windows.Forms.CheckBox();
+			this.button4 = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// dbNameBox
@@ -102,11 +104,34 @@
 			this.button3.UseVisualStyleBackColor = true;
 			this.button3.Click += new System.EventHandler(this.button3_Click);
 			// 
+			// isUseBin
+			// 
+			this.isUseBin.AutoSize = true;
+			this.isUseBin.Location = new System.Drawing.Point(504, 289);
+			this.isUseBin.Name = "isUseBin";
+			this.isUseBin.Size = new System.Drawing.Size(149, 29);
+			this.isUseBin.TabIndex = 7;
+			this.isUseBin.Text = "Use Binary";
+			this.isUseBin.UseVisualStyleBackColor = true;
+			this.isUseBin.CheckedChanged += new System.EventHandler(this.isUseBin_CheckedChanged);
+			// 
+			// button4
+			// 
+			this.button4.Location = new System.Drawing.Point(339, 439);
+			this.button4.Name = "button4";
+			this.button4.Size = new System.Drawing.Size(181, 57);
+			this.button4.TabIndex = 8;
+			this.button4.Text = "Transactions";
+			this.button4.UseVisualStyleBackColor = true;
+			this.button4.Click += new System.EventHandler(this.transactions_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(821, 560);
+			this.Controls.Add(this.button4);
+			this.Controls.Add(this.isUseBin);
 			this.Controls.Add(this.button3);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.dbComboBox);
@@ -131,6 +156,8 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.ComboBox dbComboBox;
 		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.CheckBox isUseBin;
+		private System.Windows.Forms.Button button4;
 	}
 }
 

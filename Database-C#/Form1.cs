@@ -102,5 +102,20 @@ namespace Database_C_
 			Form db = new DatabaseView();
 			db.Show();
 		}
+
+		private void isUseBin_CheckedChanged(object sender, EventArgs e)
+		{
+			if (isUseBin.Checked)
+				Handler.isCSV = false;
+			else
+				Handler.isCSV = true;
+		}
+		private void transactions_Click(object sender, EventArgs e)
+		{
+			SelectDB();
+
+			Form form = new TransactionsView();
+			form.Show();
+		}
 	}
 }

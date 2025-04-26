@@ -8,6 +8,6 @@ namespace Database_C_.Utils
 {
 	internal class Handler
 	{
-		public static bool isCSV = false; 
+		public static bool isCSV = true; 
 	}
 }
