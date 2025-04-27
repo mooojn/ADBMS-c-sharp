@@ -9,387 +9,362 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Microsoft.VisualBasic; 
 
 namespace Database_C_
 {
-	public partial class DatabaseView : Form
-	{
-		public DatabaseView()
-		{
-			InitializeComponent();
-		}
+    public partial class DatabaseView : Form
+    {
+        public DatabaseView()
+        {
+            InitializeComponent();
+        }
 
-		private void DatabaseView_Load(object sender, EventArgs e)
-		{
-			string dbPath = Path.Combine(Vars.databasePath, Vars.selectedDb);
+        private void DatabaseView_Load(object sender, EventArgs e)
+        {
+            string dbPath = Path.Combine(Vars.databasePath, Vars.selectedDb);
+            tableComboBox.Items.Clear();
 
-			tableComboBox.Items.Clear();
+            if (Directory.Exists(dbPath))
+            {
+                string[] files = Handler.isCSV
+                    ? Directory.GetFiles(dbPath, "*.csv")
+                    : Directory.GetFiles(dbPath, "*.bin");
 
-			if (Directory.Exists(dbPath))
-			{
-				string[] files;
-				if (Handler.isCSV)
-					files = Directory.GetFiles(dbPath, "*.csv");
-				else
-					files = Directory.GetFiles(dbPath, "*.bin");
+                foreach (string file in files)
+                {
+                    tableComboBox.Items.Add(Path.GetFileNameWithoutExtension(file));
+                }
 
-				foreach (string file in files)
-				{
-					string fileName = Path.GetFileNameWithoutExtension(file);
-					tableComboBox.Items.Add(fileName);
-				}
+                if (tableComboBox.Items.Count > 0)
+                    tableComboBox.SelectedIndex = 0;
+            }
+            else
+            {
+                MessageBox.Show("Database folder not found.");
+            }
+        }
 
-				if (tableComboBox.Items.Count > 0)
-				{
-					tableComboBox.SelectedIndex = 0;
-				}
-			}
-			else
-			{
-				MessageBox.Show("Database folder not found.");
-			}
-		}
+        private void tableComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Handler.isCSV)
+                LoadTableCSV();
+            else
+                LoadTableBIN();
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (Handler.isCSV)
+                LoadTableCSV();
+            else
+                LoadTableBIN();
+        }
 
-		private void tableComboBox_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			if (Handler.isCSV)
-				LoadTableCSV();
-			else
-				LoadTableBIN();
-		}
+        private void LoadTableBIN()
+        {
+            if (tableComboBox.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a table.");
+                return;
+            }
 
-		private void button2_Click(object sender, EventArgs e)
-		{
-			if (Handler.isCSV)
-				LoadTableCSV();
-			else
-				LoadTableBIN();
-		}
-		private void LoadTableBIN()
-		{
-			if (tableComboBox.SelectedItem == null)
-			{
-				MessageBox.Show("Please select a table.");
-				return;
-			}
+            string tableName = tableComboBox.SelectedItem.ToString();
+            string filePath = Path.Combine(Vars.databasePath, Vars.selectedDb, tableName + ".bin");
 
-			string tableName = tableComboBox.SelectedItem.ToString();
-			string filePath = Path.Combine(Vars.databasePath, Vars.selectedDb, tableName + ".bin");
+            if (!File.Exists(filePath))
+            {
+                MessageBox.Show("Table file not found.");
+                return;
+            }
 
-			if (!File.Exists(filePath))
-			{
-				MessageBox.Show("Table file not found.");
-				return;
-			}
+            try
+            {
+                List<TableRow> rows;
+                List<string> columns;
 
-			try
-			{
-				List<TableRow> rows;
-				List<string> columns;
+                using (FileStream fs = new FileStream(filePath, FileMode.Open))
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    columns = (List<string>)formatter.Deserialize(fs);
+                    rows = (List<TableRow>)formatter.Deserialize(fs);
+                }
 
-				using (FileStream fs = new FileStream(filePath, FileMode.Open))
-				{
-					BinaryFormatter formatter = new BinaryFormatter();
-					columns = (List<string>)formatter.Deserialize(fs);  // Deserialize column names
-					rows = (List<TableRow>)formatter.Deserialize(fs);    // Deserialize rows
-				}
+                DataTable dt = new DataTable();
+                foreach (var column in columns)
+                {
+                    dt.Columns.Add(column);
+                }
 
-				DataTable dt = new DataTable();
+                if (rows.Count > 0)
+                {
+                    foreach (var row in rows)
+                    {
+                        dt.Rows.Add(row.Columns.ToArray());
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Table is empty. You can add new data.");
+                }
 
-				// Add columns to DataTable from the deserialized column names
-				foreach (var column in columns)
-				{
-					dt.Columns.Add(column);
-				}
+                tableData.DataSource = dt;
+                tableData.AllowUserToAddRows = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading table:\n" + ex.Message);
+            }
+        }
 
-				// If there are rows, add them to the DataTable
-				if (rows.Count > 0)
-				{
-					foreach (var row in rows)
-					{
-						dt.Rows.Add(row.Columns.ToArray());
-					}
-				}
-				else
-				{
-					// If no rows, ensure the DataGridView is still populated with columns
-					MessageBox.Show("Table is empty. You can add new data.");
-				}
+        private void LoadTableCSV()
+        {
+            if (tableComboBox.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a table.");
+                return;
+            }
 
-				// Bind DataGridView to the DataTable
-				tableData.DataSource = dt;
+            string tableName = tableComboBox.SelectedItem.ToString();
+            string filePath = Path.Combine(Vars.databasePath, Vars.selectedDb, tableName + ".csv");
 
-				// Allow adding new rows to the DataGridView
-				tableData.AllowUserToAddRows = true;
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Error loading table:\n" + ex.Message);
-			}
-		}
+            if (!File.Exists(filePath))
+            {
+                MessageBox.Show("Table file not found.");
+                return;
+            }
 
-		private void LoadTableCSV()
-		{
-			if (tableComboBox.SelectedItem == null)
-			{
-				MessageBox.Show("Please select a table.");
-				return;
-			}
+            try
+            {
+                DataTable dt = new DataTable();
+                string[] lines = File.ReadAllLines(filePath);
 
-			string tableName = tableComboBox.SelectedItem.ToString();
-			string filePath = Path.Combine(Vars.databasePath, Vars.selectedDb, tableName + ".csv");
+                if (lines.Length > 0)
+                {
+                    string[] headers = lines[0].Split(',');
+                    foreach (string header in headers)
+                    {
+                        dt.Columns.Add(header);
+                    }
 
-			if (!File.Exists(filePath))
-			{
-				MessageBox.Show("Table file not found.");
-				return;
-			}
+                    for (int i = 1; i < lines.Length; i++)
+                    {
+                        string[] row = lines[i].Split(',');
+                        dt.Rows.Add(row);
+                    }
 
-			try
-			{
-				DataTable dt = new DataTable();
-				string[] lines = File.ReadAllLines(filePath);
+                    tableData.DataSource = dt;
+                }
+                else
+                {
+                    MessageBox.Show("Table is empty.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading table:\n" + ex.Message);
+            }
+        }
 
-				if (lines.Length > 0)
-				{
-					// Set columns
-					string[] headers = lines[0].Split(',');
-					foreach (string header in headers)
-					{
-						dt.Columns.Add(header);
-					}
+        private void saveBtn_Click(object sender, EventArgs e)
+        {
+            if (Handler.isCSV)
+                SaveBtnCSV();
+            else
+                SaveBtnBIN();
+        }
 
-					// Add data rows
-					for (int i = 1; i < lines.Length; i++)
-					{
-						string[] row = lines[i].Split(',');
-						dt.Rows.Add(row);
-					}
+        private void SaveBtnBIN()
+        {
+            if (tableComboBox.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a table.");
+                return;
+            }
 
-					tableData.DataSource = dt;
-				}
-				else
-				{
-					MessageBox.Show("Table is empty.");
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Error loading table:\n" + ex.Message);
-			}
-		}
+            string tableName = tableComboBox.SelectedItem.ToString();
+            string filePath = Path.Combine(Vars.databasePath, Vars.selectedDb, tableName + ".bin");
 
+            try
+            {
+                List<TableRow> rows = new List<TableRow>();
+                List<string> columns = new List<string>();
 
-		private void tableData_CellContentClick(object sender, DataGridViewCellEventArgs e)
-		{
+                foreach (DataGridViewColumn column in tableData.Columns)
+                {
+                    columns.Add(column.HeaderText);
+                }
 
-		}
-		private void saveBtnBIN()
-		{
-			if (tableComboBox.SelectedItem == null)
-			{
-				MessageBox.Show("Please select a table.");
-				return;
-			}
+                foreach (DataGridViewRow row in tableData.Rows)
+                {
+                    if (!row.IsNewRow)
+                    {
+                        List<string> rowData = new List<string>();
+                        foreach (DataGridViewCell cell in row.Cells)
+                        {
+                            rowData.Add(cell.Value?.ToString() ?? "");
+                        }
+                        rows.Add(new TableRow(rowData));
+                    }
+                }
 
-			string tableName = tableComboBox.SelectedItem.ToString();
-			string filePath = Path.Combine(Vars.databasePath, Vars.selectedDb, tableName + ".bin");
+                using (FileStream fs = new FileStream(filePath, FileMode.Create))
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    formatter.Serialize(fs, columns);
+                    formatter.Serialize(fs, rows);
+                }
 
-			try
-			{
-				List<TableRow> rows = new List<TableRow>();
-				List<string> columns = new List<string>();
+                MessageBox.Show("Table saved successfully.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error saving table:\n" + ex.Message);
+            }
+        }
 
-				// Read columns from DataGridView
-				for (int i = 0; i < tableData.Columns.Count; i++)
-				{
-					columns.Add(tableData.Columns[i].HeaderText);
-				}
+        private void SaveBtnCSV()
+        {
+            if (tableComboBox.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a table.");
+                return;
+            }
 
-				// Add data rows (including any new rows added by the user)
-				foreach (DataGridViewRow row in tableData.Rows)
-				{
-					if (!row.IsNewRow) // Skip empty new row
-					{
-						List<string> rowData = new List<string>();
-						for (int i = 0; i < tableData.Columns.Count; i++)
-						{
-							rowData.Add(row.Cells[i].Value?.ToString() ?? "");
-						}
-						rows.Add(new TableRow(rowData));
-					}
-				}
+            string tableName = tableComboBox.SelectedItem.ToString();
+            string filePath = Path.Combine(Vars.databasePath, Vars.selectedDb, tableName + ".csv");
 
-				// Serialize data back to the .bin file
-				using (FileStream fs = new FileStream(filePath, FileMode.Create))
-				{
-					BinaryFormatter formatter = new BinaryFormatter();
-					formatter.Serialize(fs, columns);  // Serialize columns
-					formatter.Serialize(fs, rows);     // Serialize rows
-				}
+            try
+            {
+                StringBuilder csvContent = new StringBuilder();
 
-				MessageBox.Show("Table saved successfully.");
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Error saving table:\n" + ex.Message);
-			}
-		}
-		private void saveBtn_Click(object sender, EventArgs e)
-		{
-			if (Handler.isCSV)
-				saveBtnCSV();
-			else
-				saveBtnBIN();
-		}
-		private void deleteBtn_Click(object sender, EventArgs e)
-		{
-			if (Handler.isCSV)
-				deleteBtnCSV();
-			else
-				deleteBtnBIN();
-		}
-		private void saveBtnCSV()
-		{
-			if (tableComboBox.SelectedItem == null)
-			{
-				MessageBox.Show("Please select a table.");
-				return;
-			}
+                for (int i = 0; i < tableData.Columns.Count; i++)
+                {
+                    csvContent.Append(tableData.Columns[i].HeaderText);
+                    if (i < tableData.Columns.Count - 1)
+                        csvContent.Append(",");
+                }
+                csvContent.AppendLine();
 
-			string tableName = tableComboBox.SelectedItem.ToString();
-			string filePath = Path.Combine(Vars.databasePath, Vars.selectedDb, tableName + ".csv");
+                foreach (DataGridViewRow row in tableData.Rows)
+                {
+                    if (!row.IsNewRow)
+                    {
+                        for (int i = 0; i < tableData.Columns.Count; i++)
+                        {
+                            csvContent.Append(row.Cells[i].Value?.ToString() ?? "");
+                            if (i < tableData.Columns.Count - 1)
+                                csvContent.Append(",");
+                        }
+                        csvContent.AppendLine();
+                    }
+                }
 
-			try
-			{
-				StringBuilder csvContent = new StringBuilder();
+                File.WriteAllText(filePath, csvContent.ToString());
+                MessageBox.Show("Table saved successfully.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error saving table:\n" + ex.Message);
+            }
+        }
 
-				// Write column headers
-				for (int i = 0; i < tableData.Columns.Count; i++)
-				{
-					csvContent.Append(tableData.Columns[i].HeaderText);
-					if (i < tableData.Columns.Count - 1)
-						csvContent.Append(",");
-				}
-				csvContent.AppendLine();
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            if (Handler.isCSV)
+                DeleteBtnCSV();
+            else
+                DeleteBtnBIN();
+        }
 
-				// Write rows
-				foreach (DataGridViewRow row in tableData.Rows)
-				{
-					if (!row.IsNewRow) // skip empty new row
-					{
-						for (int i = 0; i < tableData.Columns.Count; i++)
-						{
-							csvContent.Append(row.Cells[i].Value?.ToString() ?? "");
-							if (i < tableData.Columns.Count - 1)
-								csvContent.Append(",");
-						}
-						csvContent.AppendLine();
-					}
-				}
+        private void DeleteBtnBIN()
+        {
+            if (tableComboBox.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a table to delete.");
+                return;
+            }
 
-				// Save to file
-				File.WriteAllText(filePath, csvContent.ToString());
-				MessageBox.Show("Table saved successfully.");
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("Error saving table:\n" + ex.Message);
-			}
-		}
-		private void deleteBtnBIN()
-		{
-			if (tableComboBox.SelectedItem == null)
-			{
-				MessageBox.Show("Please select a table to delete.");
-				return;
-			}
+            string tableName = tableComboBox.SelectedItem.ToString();
+            string filePath = Path.Combine(Vars.databasePath, Vars.selectedDb, tableName + ".bin");
 
-			string tableName = tableComboBox.SelectedItem.ToString();
-			string filePath = Path.Combine(Vars.databasePath, Vars.selectedDb, tableName + ".bin");
+            if (File.Exists(filePath))
+            {
+                var confirm = MessageBox.Show("Are you sure you want to delete this table?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (confirm == DialogResult.Yes)
+                {
+                    File.Delete(filePath);
+                    MessageBox.Show("Table deleted.");
 
-			if (File.Exists(filePath))
-			{
-				var confirm = MessageBox.Show("Are you sure you want to delete this table?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-				if (confirm == DialogResult.Yes)
-				{
-					File.Delete(filePath);
-					MessageBox.Show("Table deleted.");
+                    tableComboBox.Items.Remove(tableName);
+                    if (tableComboBox.Items.Count > 0)
+                        tableComboBox.SelectedIndex = 0;
 
-					// Refresh table list
-					tableComboBox.Items.Remove(tableName);
+                    tableData.DataSource = null;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Table file not found.");
+            }
+        }
 
-					if (tableComboBox.Items.Count > 0)
-					{
-						tableComboBox.SelectedIndex = 0;
-					}
-					tableData.DataSource = null;
-				}
-			}
-			else
-			{
-				MessageBox.Show("Table file not found.");
-			}
-		}
-		
+        private void DeleteBtnCSV()
+        {
+            if (tableComboBox.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a table to delete.");
+                return;
+            }
 
-		private void deleteBtnCSV()
-		{
-			if (tableComboBox.SelectedItem == null)
-			{
-				MessageBox.Show("Please select a table to delete.");
-				return;
-			}
+            string tableName = tableComboBox.SelectedItem.ToString();
+            string filePath = Path.Combine(Vars.databasePath, Vars.selectedDb, tableName + ".csv");
 
-			string tableName = tableComboBox.SelectedItem.ToString();
-			string filePath = Path.Combine(Vars.databasePath, Vars.selectedDb, tableName + ".csv");
+            if (File.Exists(filePath))
+            {
+                var confirm = MessageBox.Show("Are you sure you want to delete this table?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (confirm == DialogResult.Yes)
+                {
+                    File.Delete(filePath);
+                    MessageBox.Show("Table deleted.");
 
-			if (File.Exists(filePath))
-			{
-				var confirm = MessageBox.Show("Are you sure you want to delete this table?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-				if (confirm == DialogResult.Yes)
-				{
-					File.Delete(filePath);
-					MessageBox.Show("Table deleted.");
+                    tableComboBox.Items.Remove(tableName);
+                    if (tableComboBox.Items.Count > 0)
+                        tableComboBox.SelectedIndex = 0;
 
-					// Refresh table list
-					tableComboBox.Items.Remove(tableName);
+                    tableData.DataSource = null;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Table file not found.");
+            }
+        }
 
-					if (tableComboBox.Items.Count > 0)
-					{
-						tableComboBox.SelectedIndex = 0;
-					}
-					tableData.DataSource = null;
-				}
-			}
-			else
-			{
-				MessageBox.Show("Table file not found.");
-			}
-		}
+        private void label1_Click(object sender, EventArgs e)
+        {
+            // Empty unless you want to add something
+        }
 
-		private void label1_Click(object sender, EventArgs e)
-		{
+        private void tableData_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Empty unless needed
+        }
 
-		}
-		private void executeQueryBtn_Click(object sender, EventArgs e)
-		{
-			string query = queryBox.Text;
-			bool isTableChanged = Parser.ParseQuery(query, tableData);
-			if (isTableChanged)
-				return;
+        private void executeQueryBtn_Click(object sender, EventArgs e)
+        {
+            string query = queryBox.Text;
+            bool isTableChanged = Parser.ParseQuery(query, tableData);
 
-			if (Handler.isCSV)
-				LoadTableCSV();
-			else
-				LoadTableBIN();
-		}
+            if (isTableChanged)
+                return;
 
-
-	}
+            if (Handler.isCSV)
+                LoadTableCSV();
+            else
+                LoadTableBIN();
+        }
+    }
 }

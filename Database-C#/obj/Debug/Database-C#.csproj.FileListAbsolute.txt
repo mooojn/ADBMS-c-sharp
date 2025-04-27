@@ -23,3 +23,4 @@ E:\semester 4\ADBMS\proj\ADBMS-c-sharp\Database-C#\obj\Debug\Database-C#.csproj.
 E:\semester 4\ADBMS\proj\ADBMS-c-sharp\Database-C#\obj\Debug\Database-C#.exe
 E:\semester 4\ADBMS\proj\ADBMS-c-sharp\Database-C#\obj\Debug\Database-C#.pdb
 C:\Users\moon\Desktop\Database-C#\Database-C#\obj\Debug\Database_C_.TransactionsView.resources
+E:\semester 4\ADBMS\proj\ADBMS-c-sharp\Database-C#\obj\Debug\Database_C_.TransactionsView.resources
