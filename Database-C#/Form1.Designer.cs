@@ -37,6 +37,9 @@
 			this.button3 = new System.Windows.Forms.Button();
 			this.isUseBin = new System.Windows.Forms.CheckBox();
 			this.button4 = new System.Windows.Forms.Button();
+			this.button5 = new System.Windows.Forms.Button();
+			this.panelCSVControls = new System.Windows.Forms.Panel();
+			this.panelCSVControls.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// dbNameBox
@@ -117,7 +120,7 @@
 			// 
 			// button4
 			// 
-			this.button4.Location = new System.Drawing.Point(198, 451);
+			this.button4.Location = new System.Drawing.Point(354, 18);
 			this.button4.Name = "button4";
 			this.button4.Size = new System.Drawing.Size(181, 57);
 			this.button4.TabIndex = 8;
@@ -125,12 +128,31 @@
 			this.button4.UseVisualStyleBackColor = true;
 			this.button4.Click += new System.EventHandler(this.transactions_Click);
 			// 
+			// button5
+			// 
+			this.button5.Location = new System.Drawing.Point(48, 18);
+			this.button5.Name = "button5";
+			this.button5.Size = new System.Drawing.Size(181, 57);
+			this.button5.TabIndex = 9;
+			this.button5.Text = "Create Index";
+			this.button5.UseVisualStyleBackColor = true;
+			this.button5.Click += new System.EventHandler(this.button5_Click);
+			// 
+			// panelCSVControls
+			// 
+			this.panelCSVControls.Controls.Add(this.button5);
+			this.panelCSVControls.Controls.Add(this.button4);
+			this.panelCSVControls.Location = new System.Drawing.Point(150, 432);
+			this.panelCSVControls.Name = "panelCSVControls";
+			this.panelCSVControls.Size = new System.Drawing.Size(580, 100);
+			this.panelCSVControls.TabIndex = 10;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(821, 560);
-			this.Controls.Add(this.button4);
+			this.Controls.Add(this.panelCSVControls);
 			this.Controls.Add(this.isUseBin);
 			this.Controls.Add(this.button3);
 			this.Controls.Add(this.label2);
@@ -142,6 +164,7 @@
 			this.Name = "Form1";
 			this.Text = "Form1";
 			this.Load += new System.EventHandler(this.Form1_Load);
+			this.panelCSVControls.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -158,6 +181,8 @@
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.CheckBox isUseBin;
 		private System.Windows.Forms.Button button4;
+		private System.Windows.Forms.Button button5;
+		private System.Windows.Forms.Panel panelCSVControls;
 	}
 }
 

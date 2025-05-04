@@ -80,114 +80,154 @@ namespace Database_C_.Utils
             MessageBox.Show("Row inserted");
         }
 
+		private static void HandleSelect(string query, DataGridView tableData, string basePath)
+		{
+			try
+			{
+				var selectRegex = new Regex(
+					@"SELECT\s+(?<cols>\*|[\w\s,\.]+)\s+FROM\s+(?<table1>\w+)" +
+					@"(\s+WHERE\s+(?<whereCond>.+))?",
+					RegexOptions.IgnoreCase
+				);
 
-        private static void HandleSelect(string query, DataGridView tableData, string basePath)
-        {
-            try
-            {
-                var selectRegex = new Regex(
-                    @"SELECT\s+(?<cols>\*|[\w\s,\.]+)\s+FROM\s+(?<table1>\w+)" +
-                    @"(\s+WHERE\s+(?<whereCond>.+))?",
-                    RegexOptions.IgnoreCase
-                );
+				var match = selectRegex.Match(query);
+				if (!match.Success)
+				{
+					MessageBox.Show("Invalid SELECT query.");
+					return;
+				}
 
-                var match = selectRegex.Match(query);
-                if (!match.Success)
-                {
-                    MessageBox.Show("Invalid SELECT query.");
-                    return;
-                }
+				string columns = match.Groups["cols"].Value.Trim();
+				string table1 = match.Groups["table1"].Value.Trim();
+				string whereCond = match.Groups["whereCond"].Success ? match.Groups["whereCond"].Value.Trim() : null;
 
-                string columns = match.Groups["cols"].Value.Trim();
-                string table1 = match.Groups["table1"].Value.Trim();
-                string whereCond = match.Groups["whereCond"].Success ? match.Groups["whereCond"].Value.Trim() : null;
+				// Load table
+				string tablePath = Path.Combine(basePath, table1 + ".csv");
+				if (!File.Exists(tablePath)) { MessageBox.Show($"Table '{table1}' not found."); return; }
 
-                // Load table1
-                string path1 = Path.Combine(basePath, table1 + ".csv");
-                if (!File.Exists(path1)) { MessageBox.Show($"Table '{table1}' not found."); return; }
-                string[] lines1 = File.ReadAllLines(path1);
-                string[] headers1 = lines1[0].Split(',');
-                List<string[]> rows1 = lines1.Skip(1).Select(l => l.Split(',')).ToList();
+				string[] lines = File.ReadAllLines(tablePath);
+				string[] headers = lines[0].Split(',');
+				List<string[]> rows = lines.Skip(1).Select(l => l.Split(',')).ToList();
 
-                // Prepare result table
-                DataTable dt = new DataTable();
-                List<int> selectedIndices = new List<int>();
+				// Prepare result table
+				DataTable dt = new DataTable();
+				List<int> selectedIndices = new List<int>();
 
-                if (columns == "*")
-                {
-                    foreach (var col in headers1)
-                    {
-                        dt.Columns.Add($"{table1}.{col}");
-                        selectedIndices.Add(Array.IndexOf(headers1, col));
-                    }
-                }
-                else
-                {
-                    var requestedColumns = columns.Split(',').Select(c => c.Trim()).ToList();
-                    foreach (var col in requestedColumns)
-                    {
-                        string simpleCol = col.Contains('.') ? col.Split('.')[1] : col; // handle "table.column"
-                        int index = Array.IndexOf(headers1, simpleCol);
-                        if (index == -1) { MessageBox.Show($"Column '{col}' not found."); return; }
-                        dt.Columns.Add($"{table1}.{simpleCol}");
-                        selectedIndices.Add(index);
-                    }
-                }
+				if (columns == "*")
+				{
+					foreach (var col in headers)
+					{
+						dt.Columns.Add($"{table1}.{col}");
+						selectedIndices.Add(Array.IndexOf(headers, col));
+					}
+				}
+				else
+				{
+					var requestedColumns = columns.Split(',').Select(c => c.Trim()).ToList();
+					foreach (var col in requestedColumns)
+					{
+						string simpleCol = col.Contains('.') ? col.Split('.')[1] : col;
+						int index = Array.IndexOf(headers, simpleCol);
+						if (index == -1) { MessageBox.Show($"Column '{col}' not found."); return; }
+						dt.Columns.Add($"{table1}.{simpleCol}");
+						selectedIndices.Add(index);
+					}
+				}
 
-                List<string[]> filteredRows = new List<string[]>();
+				List<string[]> filteredRows = new List<string[]>();
 
-                if (!string.IsNullOrWhiteSpace(whereCond))
-                {
-                    // Try detect simple WHERE
-                    var whereMatch = Regex.Match(whereCond, @"(\w+)\s*=\s*(\w+)", RegexOptions.IgnoreCase);
-                    if (whereMatch.Success)
-                    {
-                        string whereCol = whereMatch.Groups[1].Value.Trim();
-                        string whereVal = whereMatch.Groups[2].Value.Trim();
-                    }
-                    else
-                    {
-                        // fallback slow filter if complex WHERE
-                        foreach (var row in rows1)
-                        {
-                            if (EvaluateWhere(whereCond, headers1, row))
-                                filteredRows.Add(row);
-                        }
-                    }
-                }
-                else
-                {
-                    filteredRows = rows1;
-                }
+				// Check if we can use index
+				if (!string.IsNullOrWhiteSpace(whereCond))
+				{
+					var whereMatch = Regex.Match(whereCond, @"(\w+)\s*=\s*(\w+)", RegexOptions.IgnoreCase);
+					if (whereMatch.Success)
+					{
+						string whereCol = whereMatch.Groups[1].Value.Trim();
+						string whereVal = whereMatch.Groups[2].Value.Trim();
 
-                // Fill DataTable
-                foreach (var row in filteredRows)
-                {
-                    dt.Rows.Add(selectedIndices.Select(i => row[i]).ToArray());
-                }
+						int whereIndex = Array.IndexOf(headers, whereCol);
+						if (whereIndex == -1)
+						{
+							MessageBox.Show($"WHERE column '{whereCol}' not found.");
+							return;
+						}
 
-                tableData.DataSource = dt;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-        }
+						// Try using index file
+						string indexPath = Path.Combine(basePath, "indexes", table1 + ".index");
+						if (File.Exists(indexPath))
+						{
+							var indexLines = File.ReadAllLines(indexPath);
+							Dictionary<string, int> indexMap = new Dictionary<string, int>();
+							foreach (string line in indexLines)
+							{
+								var parts = line.Split(':');
+								if (parts.Length == 2)
+									indexMap[parts[0]] = int.Parse(parts[1]);
+							}
+
+							if (indexMap.TryGetValue(whereVal, out int lineNum))
+							{
+								if (lineNum > 0 && lineNum < lines.Length)
+								{
+									filteredRows.Add(lines[lineNum].Split(','));
+								}
+							}
+							else
+							{
+								MessageBox.Show("Value not found in index.");
+							}
+
+							// Inform the user that we used the index
+							MessageBox.Show($"Data found using index for column '{whereCol}' with value '{whereVal}'.");
+						}
+						else
+						{
+							// No index, fall back to slow scan
+							foreach (var row in rows)
+								if (row[whereIndex] == whereVal)
+									filteredRows.Add(row);
+
+							// Inform the user that we used the slow CSV scan
+							MessageBox.Show($"Data found by scanning CSV (no index) for column '{whereCol}' with value '{whereVal}'.");
+						}
+					}
+					else
+					{
+						// Complex WHERE – fallback
+						foreach (var row in rows)
+						{
+							if (EvaluateWhere(whereCond, headers, row))
+								filteredRows.Add(row);
+						}
+
+						// Inform the user that we used the slow CSV scan for complex WHERE
+						MessageBox.Show("Data found using slow CSV scan due to complex WHERE condition.");
+					}
+				}
+				else
+				{
+					filteredRows = rows;
+
+					// Inform the user that no WHERE condition was used (data from all rows)
+					MessageBox.Show("Data found with no WHERE condition (all rows displayed).");
+				}
+
+				// Fill DataTable
+				foreach (var row in filteredRows)
+				{
+					dt.Rows.Add(selectedIndices.Select(i => row[i]).ToArray());
+				}
+
+				tableData.DataSource = dt;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Error: " + ex.Message);
+			}
+		}
 
 
-        private static (string[] headers, List<string[]> rows) LoadTable(string filePath)
-        {
-            if (!File.Exists(filePath))
-                throw new Exception("File not found: " + filePath);
-
-            var lines = File.ReadAllLines(filePath);
-            var headers = lines[0].Split(',');
-            var rows = lines.Skip(1).Select(line => line.Split(',')).ToList();
-
-            return (headers, rows);
-        }
-
-        private static bool EvaluateWhere(string whereCond, string[] headers, string[] row)
+		private static bool EvaluateWhere(string whereCond, string[] headers, string[] row)
         {
             if (string.IsNullOrWhiteSpace(whereCond))
                 return true;
