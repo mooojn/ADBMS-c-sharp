@@ -1,1 +1,2 @@
 python push.py
+pause
