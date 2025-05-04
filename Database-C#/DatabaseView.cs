@@ -20,6 +20,10 @@ namespace Database_C_
         public DatabaseView()
         {
             InitializeComponent();
+            if (Handler.isCSV)
+                queryPanel.Visible = true;
+            else
+                queryPanel.Visible = false;
         }
 
         private void DatabaseView_Load(object sender, EventArgs e)
@@ -366,5 +370,10 @@ namespace Database_C_
             else
                 LoadTableBIN();
         }
-    }
+
+		private void panel1_Paint(object sender, PaintEventArgs e)
+		{
+
+		}
+	}
 }

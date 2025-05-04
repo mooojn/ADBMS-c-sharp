@@ -38,7 +38,7 @@
 			// 
 			// tableName
 			// 
-			this.tableName.Location = new System.Drawing.Point(561, 115);
+			this.tableName.Location = new System.Drawing.Point(799, 113);
 			this.tableName.Name = "tableName";
 			this.tableName.Size = new System.Drawing.Size(282, 31);
 			this.tableName.TabIndex = 3;
@@ -47,7 +47,7 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(556, 77);
+			this.label1.Location = new System.Drawing.Point(794, 75);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(128, 25);
 			this.label1.TabIndex = 4;
@@ -68,12 +68,12 @@
 			this.columnsPanel.Controls.Add(this.addCol);
 			this.columnsPanel.Location = new System.Drawing.Point(54, 33);
 			this.columnsPanel.Name = "columnsPanel";
-			this.columnsPanel.Size = new System.Drawing.Size(464, 934);
+			this.columnsPanel.Size = new System.Drawing.Size(706, 934);
 			this.columnsPanel.TabIndex = 6;
 			// 
 			// createTable
 			// 
-			this.createTable.Location = new System.Drawing.Point(561, 276);
+			this.createTable.Location = new System.Drawing.Point(831, 173);
 			this.createTable.Name = "createTable";
 			this.createTable.Size = new System.Drawing.Size(181, 57);
 			this.createTable.TabIndex = 7;

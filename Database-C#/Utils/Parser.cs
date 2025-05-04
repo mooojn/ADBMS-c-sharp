@@ -37,48 +37,6 @@ namespace Database_C_.Utils
             }
             return false;
         }
-        // Build an index for a given column
-        private static Dictionary<string, List<int>> BuildIndex(string[] headers, List<string[]> rows, string columnName)
-        {
-            Dictionary<string, List<int>> index = new Dictionary<string, List<int>>();
-
-            int columnIndex = Array.IndexOf(headers, columnName);
-            if (columnIndex == -1)
-                throw new Exception($"Column '{columnName}' not found.");
-
-            for (int i = 0; i < rows.Count; i++)
-            {
-                string key = rows[i][columnIndex];
-
-                if (!index.ContainsKey(key))
-                    index[key] = new List<int>();
-
-                index[key].Add(i); // Map value to row index
-            }
-
-            return index;
-        }
-        private static Dictionary<string, List<int>> LoadIndex(string indexPath)
-        {
-            var dict = new Dictionary<string, List<int>>();
-            foreach (var line in File.ReadAllLines(indexPath))
-            {
-                var parts = line.Split(':');
-                if (parts.Length == 2)
-                {
-                    string key = parts[0];
-                    var values = parts[1].Split(',').Select(int.Parse).ToList();
-                    dict[key] = values;
-                }
-            }
-            return dict;
-        }
-
-        private static void SaveIndex(string indexPath, Dictionary<string, List<int>> index)
-        {
-            var lines = index.Select(kvp => $"{kvp.Key}:{string.Join(",", kvp.Value)}");
-            File.WriteAllLines(indexPath, lines);
-        }
 
         private static void HandleInsert(string query, string basePath)
         {
@@ -99,7 +57,12 @@ namespace Database_C_.Utils
                 return;
             }
 
-            // Read existing lines to determine the new row index
+            // Read existing lines to determine the new row
+            // 
+
+
+
+
             var lines = File.ReadAllLines(filePath).ToList();
             string[] headers = lines[0].Split(',');
 
@@ -113,31 +76,8 @@ namespace Database_C_.Utils
             lines.Add(string.Join(",", values));
             File.WriteAllLines(filePath, lines);
 
-            // Update Indexes
-            int newRowIndex = lines.Count - 2; // subtract 1 for header, subtract 1 because List index starts from 0
 
-            foreach (var header in headers)
-            {
-                string indexPath = Path.Combine(basePath, $"{table}_{header}.idx");
-
-                Dictionary<string, List<int>> index = new Dictionary<string, List<int>>();
-
-                if (File.Exists(indexPath))
-                {
-                    index = LoadIndex(indexPath);
-                }
-
-                string value = values[Array.IndexOf(headers, header)];
-
-                if (!index.ContainsKey(value))
-                    index[value] = new List<int>();
-
-                index[value].Add(newRowIndex);
-
-                SaveIndex(indexPath, index);
-            }
-
-            MessageBox.Show("Row inserted and index updated.");
+            MessageBox.Show("Row inserted");
         }
 
 
@@ -204,14 +144,6 @@ namespace Database_C_.Utils
                     {
                         string whereCol = whereMatch.Groups[1].Value.Trim();
                         string whereVal = whereMatch.Groups[2].Value.Trim();
-
-                        var index = BuildIndex(headers1, rows1, whereCol);
-
-                        if (index.TryGetValue(whereVal, out var rowIndexes))
-                        {
-                            foreach (var idx in rowIndexes)
-                                filteredRows.Add(rows1[idx]);
-                        }
                     }
                     else
                     {
@@ -301,130 +233,115 @@ namespace Database_C_.Utils
             return false;
         }
 
-        private static void HandleUpdate(string query, string basePath)
-        {
-            var match = Regex.Match(query, @"UPDATE\s+(\w+)\s+SET\s+(\w+)=(\w+)\s+WHERE\s+(\w+)=(\w+)", RegexOptions.IgnoreCase);
-            if (!match.Success) { MessageBox.Show("Invalid UPDATE query."); return; }
+		private static void HandleUpdate(string query, string basePath)
+		{
+			var match = Regex.Match(query, @"UPDATE\s+(\w+)\s+SET\s+(\w+)=(\w+)\s+WHERE\s+(\w+)=(\w+)", RegexOptions.IgnoreCase);
+			if (!match.Success) { MessageBox.Show("Invalid UPDATE query."); return; }
 
-            string table = match.Groups[1].Value;
-            string setCol = match.Groups[2].Value;
-            string setVal = match.Groups[3].Value;
-            string whereCol = match.Groups[4].Value;
-            string whereVal = match.Groups[5].Value;
-            string filePath = Path.Combine(basePath, table + ".csv");
+			string table = match.Groups[1].Value;
+			string setCol = match.Groups[2].Value;
+			string setVal = match.Groups[3].Value;
+			string whereCol = match.Groups[4].Value;
+			string whereVal = match.Groups[5].Value;
+			string filePath = Path.Combine(basePath, table + ".csv");
 
-            if (!File.Exists(filePath)) { MessageBox.Show("Table not found."); return; }
+			if (!File.Exists(filePath)) { MessageBox.Show("Table not found."); return; }
 
-            var lines = File.ReadAllLines(filePath).ToList();
-            string[] headers = lines[0].Split(',');
-            List<string[]> rows = lines.Skip(1).Select(l => l.Split(',')).ToList();
+			var lines = File.ReadAllLines(filePath).ToList();
+			string[] headers = lines[0].Split(',');
+			List<string[]> rows = lines.Skip(1).Select(l => l.Split(',')).ToList();
 
-            var index = BuildIndex(headers, rows, whereCol);
+			int setColIndex = Array.IndexOf(headers, setCol);
+			int whereColIndex = Array.IndexOf(headers, whereCol);
 
-            int setColIndex = Array.IndexOf(headers, setCol);
-            if (setColIndex == -1) { MessageBox.Show($"Set column '{setCol}' not found."); return; }
+			if (setColIndex == -1 || whereColIndex == -1)
+			{
+				MessageBox.Show("Column not found.");
+				return;
+			}
 
-            if (index.TryGetValue(whereVal, out var rowIndexes))
-            {
-                foreach (var idx in rowIndexes)
-                {
-                    rows[idx][setColIndex] = setVal;
-                }
+			bool anyMatched = false;
+			for (int i = 0; i < rows.Count; i++)
+			{
+				if (rows[i][whereColIndex] == whereVal)
+				{
+					rows[i][setColIndex] = setVal;
+					anyMatched = true;
+				}
+			}
 
-                // Save updated CSV
-                var output = new List<string> { string.Join(",", headers) };
-                output.AddRange(rows.Select(r => string.Join(",", r)));
-                File.WriteAllLines(filePath, output);
+			if (!anyMatched)
+			{
+				MessageBox.Show("No matching rows found.");
+				return;
+			}
 
-                // 🛠️ Rebuild and save updated indexes
-                var newIndexPath = Path.Combine(basePath, $"{table}_{whereCol}.idx");
-                var newIndex = BuildIndex(headers, rows, whereCol);
-                SaveIndex(newIndexPath, newIndex);
+			// Write updated content back
+			using (StreamWriter writer = new StreamWriter(filePath))
+			{
+				writer.WriteLine(string.Join(",", headers));
+				foreach (var row in rows)
+				{
+					writer.WriteLine(string.Join(",", row));
+				}
+			}
 
-                MessageBox.Show($"{rowIndexes.Count} rows updated.");
-            }
-            else
-            {
-                MessageBox.Show("No matching rows found.");
-            }
-        }
-
-
-        private static void SaveIndex(string tablePath, string columnName, Dictionary<string, List<int>> index)
-        {
-            string idxPath = tablePath.Replace(".csv", $"_{columnName}.idx");
-
-            using (StreamWriter sw = new StreamWriter(idxPath))
-            {
-                foreach (var pair in index)
-                {
-                    sw.WriteLine($"{pair.Key}:{string.Join(",", pair.Value)}");
-                }
-            }
-        }
-
-        private static Dictionary<string, List<int>> LoadIndex(string tablePath, string columnName)
-        {
-            string idxPath = tablePath.Replace(".csv", $"_{columnName}.idx");
-            var index = new Dictionary<string, List<int>>();
-
-            if (!File.Exists(idxPath)) return null;
-
-            foreach (var line in File.ReadAllLines(idxPath))
-            {
-                var parts = line.Split(':');
-                var key = parts[0];
-                var indexes = parts[1].Split(',').Select(int.Parse).ToList();
-                index[key] = indexes;
-            }
-
-            return index;
-        }
+			MessageBox.Show("Rows updated successfully.");
+		}
 
 
-        private static void HandleDelete(string query, string basePath)
-        {
-            var match = Regex.Match(query, @"DELETE\s+FROM\s+(\w+)\s+WHERE\s+(\w+)=(\w+)", RegexOptions.IgnoreCase);
-            if (!match.Success) { MessageBox.Show("Invalid DELETE query."); return; }
+		private static void HandleDelete(string query, string basePath)
+		{
+			var match = Regex.Match(query, @"DELETE\s+FROM\s+(\w+)\s+WHERE\s+(\w+)=(\w+)", RegexOptions.IgnoreCase);
+			if (!match.Success)
+			{
+				MessageBox.Show("Invalid DELETE query.");
+				return;
+			}
 
-            string table = match.Groups[1].Value;
-            string whereCol = match.Groups[2].Value;
-            string whereVal = match.Groups[3].Value;
-            string filePath = Path.Combine(basePath, table + ".csv");
+			string table = match.Groups[1].Value;
+			string whereCol = match.Groups[2].Value;
+			string whereVal = match.Groups[3].Value;
+			string filePath = Path.Combine(basePath, table + ".csv");
 
-            if (!File.Exists(filePath)) { MessageBox.Show("Table not found."); return; }
+			if (!File.Exists(filePath))
+			{
+				MessageBox.Show("Table not found.");
+				return;
+			}
 
-            var lines = File.ReadAllLines(filePath).ToList();
-            string[] headers = lines[0].Split(',');
-            List<string[]> rows = lines.Skip(1).Select(l => l.Split(',')).ToList();
+			var lines = File.ReadAllLines(filePath).ToList();
+			string[] headers = lines[0].Split(',');
+			List<string[]> rows = lines.Skip(1).Select(l => l.Split(',')).ToList();
 
-            // Build index
-            var index = BuildIndex(headers, rows, whereCol);
+			int whereColIndex = Array.IndexOf(headers, whereCol);
+			if (whereColIndex == -1)
+			{
+				MessageBox.Show($"Column '{whereCol}' not found.");
+				return;
+			}
 
-            if (index.TryGetValue(whereVal, out var rowIndexes))
-            {
-                // Delete from bottom to top
-                foreach (var idx in rowIndexes.OrderByDescending(i => i))
-                    rows.RemoveAt(idx);
+			int originalCount = rows.Count;
+			rows = rows.Where(row => row[whereColIndex] != whereVal).ToList();
 
-                // Save updated file
-                var output = new List<string> { string.Join(",", headers) };
-                output.AddRange(rows.Select(r => string.Join(",", r)));
-                File.WriteAllLines(filePath, output);
+			if (rows.Count == originalCount)
+			{
+				MessageBox.Show("No matching rows found.");
+				return;
+			}
 
-                // 🛠️ Rebuild and save updated indexes
-                var newIndexPath = Path.Combine(basePath, $"{table}_{whereCol}.idx");
-                var newIndex = BuildIndex(headers, rows, whereCol);
-                SaveIndex(newIndexPath, newIndex);
+			using (StreamWriter writer = new StreamWriter(filePath))
+			{
+				writer.WriteLine(string.Join(",", headers));
+				foreach (var row in rows)
+				{
+					writer.WriteLine(string.Join(",", row));
+				}
+			}
 
-                MessageBox.Show($"{rowIndexes.Count} rows deleted.");
-            }
-            else
-            {
-                MessageBox.Show("No matching rows found.");
-            }
-        }
+			MessageBox.Show("Row(s) deleted successfully.");
+		}
 
 
-    }
+	}
 }

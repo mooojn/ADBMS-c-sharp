@@ -74,7 +74,6 @@
       <DependentUpon>TransactionsView.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\Handler.cs" />
-    <Compile Include="Utils\IndexManager.cs" />
     <Compile Include="Utils\Parser.cs" />
     <Compile Include="Utils\TransactionManager.cs" />
     <Compile Include="Utils\Vars.cs" />

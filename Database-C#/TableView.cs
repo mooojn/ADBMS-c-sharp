@@ -16,9 +16,15 @@ namespace Database_C_
 {
 	public partial class TableView : Form
 	{
-		int x = 30;
+		int x = 80;
 		int y = 10;
 		int colCount = 0;
+		int labelWidth = 80;
+		int boxWidth = 150;
+		int yDisplacement = 40;
+
+		int maxColumns = 11;
+
 		public TableView()
 		{
 			InitializeComponent();
@@ -31,7 +37,7 @@ namespace Database_C_
 		
 		private void addColumnButton_Click(object sender, EventArgs e)
 		{
-			if (colCount < 11)
+			if (colCount < maxColumns)
 				addColBtnClick();
 			else
 				MessageBox.Show("Column limit reached...");
@@ -47,18 +53,18 @@ namespace Database_C_
 		{
 			Label nameLabel = new Label();
 			nameLabel.Text = "Column Name";
-			nameLabel.Width = 20;
+			nameLabel.Width = labelWidth;
 
-			nameLabel.Location = new Point(x - 20, y);
+			nameLabel.Location = new Point(x - x, y+2);
 			columnsPanel.Controls.Add(nameLabel);
 		}
 		private void createCol()
 		{
-			addCol.Location = new Point(x, y + 30);
+			addCol.Location = new Point(x, y + yDisplacement);
 			TextBox columnBox = new TextBox();
-			columnBox.Width = 200;
+			columnBox.Width = boxWidth;
 			columnBox.Location = new Point(x, y);
-			y += 40;
+			y += yDisplacement;
 
 			columnsPanel.Controls.Add(columnBox);
 		}

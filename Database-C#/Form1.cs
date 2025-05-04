@@ -98,6 +98,17 @@ namespace Database_C_
 		private void button3_Click(object sender, EventArgs e)
 		{
 			SelectDB();
+			string dbPath = Path.Combine(Vars.databasePath, Vars.selectedDb);
+
+			string[] tables = Handler.isCSV
+				? Directory.GetFiles(dbPath, "*.csv")
+				: Directory.GetFiles(dbPath, "*.bin");
+
+			if (tables.Length == 0)
+			{
+				MessageBox.Show("No tables found for this database.");
+				return;
+			}
 
 			Form db = new DatabaseView();
 			db.Show();
