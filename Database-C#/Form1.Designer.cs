@@ -52,9 +52,9 @@
 			this.label1.AutoSize = true;
 			this.label1.Location = new System.Drawing.Point(193, 127);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(65, 25);
+			this.label1.Size = new System.Drawing.Size(68, 25);
 			this.label1.TabIndex = 1;
-			this.label1.Text = "name";
+			this.label1.Text = "Name";
 			this.label1.Click += new System.EventHandler(this.label1_Click);
 			// 
 			// button1
@@ -69,7 +69,7 @@
 			// 
 			// button2
 			// 
-			this.button2.Location = new System.Drawing.Point(481, 360);
+			this.button2.Location = new System.Drawing.Point(198, 358);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(181, 57);
 			this.button2.TabIndex = 3;
@@ -96,7 +96,7 @@
 			// 
 			// button3
 			// 
-			this.button3.Location = new System.Drawing.Point(184, 360);
+			this.button3.Location = new System.Drawing.Point(504, 272);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(181, 57);
 			this.button3.TabIndex = 6;
@@ -107,7 +107,7 @@
 			// isUseBin
 			// 
 			this.isUseBin.AutoSize = true;
-			this.isUseBin.Location = new System.Drawing.Point(504, 289);
+			this.isUseBin.Location = new System.Drawing.Point(519, 373);
 			this.isUseBin.Name = "isUseBin";
 			this.isUseBin.Size = new System.Drawing.Size(149, 29);
 			this.isUseBin.TabIndex = 7;
@@ -117,7 +117,7 @@
 			// 
 			// button4
 			// 
-			this.button4.Location = new System.Drawing.Point(339, 439);
+			this.button4.Location = new System.Drawing.Point(198, 451);
 			this.button4.Name = "button4";
 			this.button4.Size = new System.Drawing.Size(181, 57);
 			this.button4.TabIndex = 8;
