@@ -38,6 +38,7 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.queryBox = new System.Windows.Forms.TextBox();
 			this.queryPanel = new System.Windows.Forms.Panel();
+			this.timeLabel = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.tableData)).BeginInit();
 			this.queryPanel.SuspendLayout();
 			this.SuspendLayout();
@@ -130,14 +131,26 @@
 			// 
 			// queryPanel
 			// 
+			this.queryPanel.Controls.Add(this.timeLabel);
 			this.queryPanel.Controls.Add(this.queryBox);
 			this.queryPanel.Controls.Add(this.button4);
 			this.queryPanel.Controls.Add(this.label1);
 			this.queryPanel.Location = new System.Drawing.Point(161, 159);
 			this.queryPanel.Name = "queryPanel";
-			this.queryPanel.Size = new System.Drawing.Size(530, 134);
+			this.queryPanel.Size = new System.Drawing.Size(710, 134);
 			this.queryPanel.TabIndex = 15;
 			this.queryPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+			// 
+			// timeLabel
+			// 
+			this.timeLabel.AutoSize = true;
+			this.timeLabel.ForeColor = System.Drawing.Color.DodgerBlue;
+			this.timeLabel.Location = new System.Drawing.Point(538, 53);
+			this.timeLabel.Name = "timeLabel";
+			this.timeLabel.Size = new System.Drawing.Size(52, 25);
+			this.timeLabel.TabIndex = 15;
+			this.timeLabel.Text = "time";
+			this.timeLabel.Click += new System.EventHandler(this.timeLabel_Click);
 			// 
 			// DatabaseView
 			// 
@@ -174,5 +187,6 @@
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.TextBox queryBox;
 		private System.Windows.Forms.Panel queryPanel;
+		private System.Windows.Forms.Label timeLabel;
 	}
 }

@@ -10,6 +10,8 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics; 
+
 using System.Windows.Forms;
 using Microsoft.VisualBasic; 
 
@@ -53,19 +55,29 @@ namespace Database_C_
 
         private void tableComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Handler.isCSV)
+			Stopwatch stopwatch = new Stopwatch();
+			stopwatch.Start();
+
+			if (Handler.isCSV)
                 LoadTableCSV();
             else
                 LoadTableBIN();
-        }
+			stopwatch.Stop();
+			timeLabel.Text = $"Time: {stopwatch.ElapsedMilliseconds} ms";
+		}
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (Handler.isCSV)
+			Stopwatch stopwatch = new Stopwatch();
+			stopwatch.Start();
+
+			if (Handler.isCSV)
                 LoadTableCSV();
             else
                 LoadTableBIN();
-        }
+			stopwatch.Stop();
+			timeLabel.Text = $"Time: {stopwatch.ElapsedMilliseconds} ms";
+		}
 
         private void LoadTableBIN()
         {
@@ -357,21 +369,36 @@ namespace Database_C_
             // Empty unless needed
         }
 
-        private void executeQueryBtn_Click(object sender, EventArgs e)
-        {
-            string query = queryBox.Text;
-            bool isTableChanged = Parser.ParseQuery(query, tableData);
+		private void executeQueryBtn_Click(object sender, EventArgs e)
+		{
+			Stopwatch stopwatch = new Stopwatch();
+			stopwatch.Start();
 
-            if (isTableChanged)
-                return;
+			string query = queryBox.Text;
+			bool isTableChanged = Parser.ParseQuery(query, tableData);
 
-            if (Handler.isCSV)
-                LoadTableCSV();
-            else
-                LoadTableBIN();
-        }
+			if (isTableChanged)
+			{
+				stopwatch.Stop();
+				timeLabel.Text = $"Time: {stopwatch.ElapsedMilliseconds} ms";
+				return;
+			}
+
+			if (Handler.isCSV)
+				LoadTableCSV();
+			else
+				LoadTableBIN();
+
+			//stopwatch.Stop();
+			//timeLabel.Text = $"Time: {stopwatch.ElapsedMilliseconds} ms";
+		}
 
 		private void panel1_Paint(object sender, PaintEventArgs e)
+		{
+
+		}
+
+		private void timeLabel_Click(object sender, EventArgs e)
 		{
 
 		}
