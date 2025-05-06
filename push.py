@@ -17,4 +17,4 @@ os.system(f'git commit -m "{msg}"')
 print(colored("Pushing to origin/main...", "magenta"))
 os.system("git push -u origin main")
 
-print(colored("✅ Done!", "green"))
+print(colored("Done!", "green"))
