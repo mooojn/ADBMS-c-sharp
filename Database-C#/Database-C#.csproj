@@ -73,6 +73,12 @@
     <Compile Include="TransactionsView.Designer.cs">
       <DependentUpon>TransactionsView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Ui-elements.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utils\Ui-elements.Designer.cs">
+      <DependentUpon>Ui-elements.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\Handler.cs" />
     <Compile Include="Utils\Parser.cs" />
     <Compile Include="Utils\TransactionManager.cs" />
@@ -97,6 +103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TransactionsView.resx">
       <DependentUpon>TransactionsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utils\Ui-elements.resx">
+      <DependentUpon>Ui-elements.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

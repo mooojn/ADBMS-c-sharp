@@ -30,9 +30,9 @@
 		{
 			this.dataTable = new System.Windows.Forms.DataGridView();
 			this.tableComboBox = new System.Windows.Forms.ComboBox();
-			this.commitBtn = new System.Windows.Forms.Button();
-			this.rollbackBtn = new System.Windows.Forms.Button();
 			this.label2 = new System.Windows.Forms.Label();
+			this.rollbackBtn = new System.Windows.Forms.Button();
+			this.commitBtn = new System.Windows.Forms.Button();
 			this.startBtn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dataTable)).BeginInit();
 			this.SuspendLayout();
@@ -57,26 +57,6 @@
 			this.tableComboBox.TabIndex = 10;
 			this.tableComboBox.SelectedIndexChanged += new System.EventHandler(this.tableComboBox_SelectedIndexChanged);
 			// 
-			// commitBtn
-			// 
-			this.commitBtn.Location = new System.Drawing.Point(673, 205);
-			this.commitBtn.Name = "commitBtn";
-			this.commitBtn.Size = new System.Drawing.Size(181, 57);
-			this.commitBtn.TabIndex = 12;
-			this.commitBtn.Text = "Commit";
-			this.commitBtn.UseVisualStyleBackColor = true;
-			this.commitBtn.Click += new System.EventHandler(this.commitButton_Click);
-			// 
-			// rollbackBtn
-			// 
-			this.rollbackBtn.Location = new System.Drawing.Point(898, 205);
-			this.rollbackBtn.Name = "rollbackBtn";
-			this.rollbackBtn.Size = new System.Drawing.Size(181, 57);
-			this.rollbackBtn.TabIndex = 11;
-			this.rollbackBtn.Text = "Rollback";
-			this.rollbackBtn.UseVisualStyleBackColor = true;
-			this.rollbackBtn.Click += new System.EventHandler(this.rollbackButton_Click);
-			// 
 			// label2
 			// 
 			this.label2.AutoSize = true;
@@ -86,14 +66,43 @@
 			this.label2.TabIndex = 13;
 			this.label2.Text = "Table Name";
 			// 
+			// rollbackBtn
+			// 
+			this.rollbackBtn.BackColor = System.Drawing.Color.OrangeRed;
+			this.rollbackBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.rollbackBtn.ForeColor = System.Drawing.Color.White;
+			this.rollbackBtn.Location = new System.Drawing.Point(894, 205);
+			this.rollbackBtn.Name = "rollbackBtn";
+			this.rollbackBtn.Size = new System.Drawing.Size(181, 57);
+			this.rollbackBtn.TabIndex = 15;
+			this.rollbackBtn.Text = "Rollback";
+			this.rollbackBtn.UseVisualStyleBackColor = false;
+			this.rollbackBtn.Click += new System.EventHandler(this.rollbackButton_Click);
+			// 
+			// commitBtn
+			// 
+			this.commitBtn.BackColor = System.Drawing.Color.ForestGreen;
+			this.commitBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.commitBtn.ForeColor = System.Drawing.Color.White;
+			this.commitBtn.Location = new System.Drawing.Point(666, 205);
+			this.commitBtn.Name = "commitBtn";
+			this.commitBtn.Size = new System.Drawing.Size(181, 57);
+			this.commitBtn.TabIndex = 16;
+			this.commitBtn.Text = "Commit";
+			this.commitBtn.UseVisualStyleBackColor = false;
+			this.commitBtn.Click += new System.EventHandler(this.commitButton_Click);
+			// 
 			// startBtn
 			// 
+			this.startBtn.BackColor = System.Drawing.SystemColors.MenuHighlight;
+			this.startBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.startBtn.ForeColor = System.Drawing.Color.White;
 			this.startBtn.Location = new System.Drawing.Point(436, 205);
 			this.startBtn.Name = "startBtn";
 			this.startBtn.Size = new System.Drawing.Size(181, 57);
-			this.startBtn.TabIndex = 14;
+			this.startBtn.TabIndex = 17;
 			this.startBtn.Text = "Start";
-			this.startBtn.UseVisualStyleBackColor = true;
+			this.startBtn.UseVisualStyleBackColor = false;
 			this.startBtn.Click += new System.EventHandler(this.startTransaction_Click);
 			// 
 			// TransactionsView
@@ -102,9 +111,9 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1335, 707);
 			this.Controls.Add(this.startBtn);
-			this.Controls.Add(this.label2);
 			this.Controls.Add(this.commitBtn);
 			this.Controls.Add(this.rollbackBtn);
+			this.Controls.Add(this.label2);
 			this.Controls.Add(this.tableComboBox);
 			this.Controls.Add(this.dataTable);
 			this.Name = "TransactionsView";
@@ -119,9 +128,9 @@
 		#endregion
 		private System.Windows.Forms.DataGridView dataTable;
 		private System.Windows.Forms.ComboBox tableComboBox;
-		private System.Windows.Forms.Button commitBtn;
-		private System.Windows.Forms.Button rollbackBtn;
 		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Button rollbackBtn;
+		private System.Windows.Forms.Button commitBtn;
 		private System.Windows.Forms.Button startBtn;
 	}
 }

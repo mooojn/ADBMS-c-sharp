@@ -17,13 +17,13 @@ namespace Database_C_
 	public partial class TableView : Form
 	{
 		int x = 80;
-		int y = 10;
+		int y = 50;
 		int colCount = 0;
 		int labelWidth = 80;
 		int boxWidth = 150;
 		int yDisplacement = 40;
 
-		int maxColumns = 11;
+		int maxColumns = 10;
 
 		public TableView()
 		{
@@ -32,7 +32,6 @@ namespace Database_C_
 
 		private void Table_Load(object sender, EventArgs e)
 		{
-			addColBtnClick();
 		}
 		
 		private void addColumnButton_Click(object sender, EventArgs e)

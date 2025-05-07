@@ -30,15 +30,15 @@
 		{
 			this.label2 = new System.Windows.Forms.Label();
 			this.tableComboBox = new System.Windows.Forms.ComboBox();
-			this.button2 = new System.Windows.Forms.Button();
 			this.tableData = new System.Windows.Forms.DataGridView();
-			this.button1 = new System.Windows.Forms.Button();
-			this.button3 = new System.Windows.Forms.Button();
-			this.button4 = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
 			this.queryBox = new System.Windows.Forms.TextBox();
 			this.queryPanel = new System.Windows.Forms.Panel();
 			this.timeLabel = new System.Windows.Forms.Label();
+			this.button6 = new System.Windows.Forms.Button();
+			this.button5 = new System.Windows.Forms.Button();
+			this.button7 = new System.Windows.Forms.Button();
+			this.button1 = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.tableData)).BeginInit();
 			this.queryPanel.SuspendLayout();
 			this.SuspendLayout();
@@ -61,16 +61,6 @@
 			this.tableComboBox.TabIndex = 6;
 			this.tableComboBox.SelectedIndexChanged += new System.EventHandler(this.tableComboBox_SelectedIndexChanged);
 			// 
-			// button2
-			// 
-			this.button2.Location = new System.Drawing.Point(486, 83);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(181, 57);
-			this.button2.TabIndex = 8;
-			this.button2.Text = "Load";
-			this.button2.UseVisualStyleBackColor = true;
-			this.button2.Click += new System.EventHandler(this.button2_Click);
-			// 
 			// tableData
 			// 
 			this.tableData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -81,36 +71,6 @@
 			this.tableData.Size = new System.Drawing.Size(1497, 488);
 			this.tableData.TabIndex = 9;
 			this.tableData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tableData_CellContentClick);
-			// 
-			// button1
-			// 
-			this.button1.Location = new System.Drawing.Point(679, 83);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(181, 57);
-			this.button1.TabIndex = 10;
-			this.button1.Text = "Save";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.saveBtn_Click);
-			// 
-			// button3
-			// 
-			this.button3.Location = new System.Drawing.Point(877, 83);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(181, 57);
-			this.button3.TabIndex = 11;
-			this.button3.Text = "Delete";
-			this.button3.UseVisualStyleBackColor = true;
-			this.button3.Click += new System.EventHandler(this.deleteBtn_Click);
-			// 
-			// button4
-			// 
-			this.button4.Location = new System.Drawing.Point(325, 37);
-			this.button4.Name = "button4";
-			this.button4.Size = new System.Drawing.Size(181, 57);
-			this.button4.TabIndex = 12;
-			this.button4.Text = "Query";
-			this.button4.UseVisualStyleBackColor = true;
-			this.button4.Click += new System.EventHandler(this.executeQueryBtn_Click);
 			// 
 			// label1
 			// 
@@ -131,9 +91,9 @@
 			// 
 			// queryPanel
 			// 
+			this.queryPanel.Controls.Add(this.button1);
 			this.queryPanel.Controls.Add(this.timeLabel);
 			this.queryPanel.Controls.Add(this.queryBox);
-			this.queryPanel.Controls.Add(this.button4);
 			this.queryPanel.Controls.Add(this.label1);
 			this.queryPanel.Location = new System.Drawing.Point(161, 159);
 			this.queryPanel.Name = "queryPanel";
@@ -152,16 +112,68 @@
 			this.timeLabel.Text = "time";
 			this.timeLabel.Click += new System.EventHandler(this.timeLabel_Click);
 			// 
+			// button6
+			// 
+			this.button6.BackColor = System.Drawing.SystemColors.MenuHighlight;
+			this.button6.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.button6.ForeColor = System.Drawing.Color.White;
+			this.button6.Location = new System.Drawing.Point(486, 83);
+			this.button6.Name = "button6";
+			this.button6.Size = new System.Drawing.Size(181, 57);
+			this.button6.TabIndex = 18;
+			this.button6.Text = "Load";
+			this.button6.UseVisualStyleBackColor = false;
+			this.button6.Click += new System.EventHandler(this.button2_Click);
+			// 
+			// button5
+			// 
+			this.button5.BackColor = System.Drawing.Color.OrangeRed;
+			this.button5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.button5.ForeColor = System.Drawing.Color.White;
+			this.button5.Location = new System.Drawing.Point(893, 81);
+			this.button5.Name = "button5";
+			this.button5.Size = new System.Drawing.Size(181, 57);
+			this.button5.TabIndex = 17;
+			this.button5.Text = "Delete";
+			this.button5.UseVisualStyleBackColor = false;
+			this.button5.Click += new System.EventHandler(this.deleteBtn_Click);
+			// 
+			// button7
+			// 
+			this.button7.BackColor = System.Drawing.Color.ForestGreen;
+			this.button7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.button7.ForeColor = System.Drawing.Color.White;
+			this.button7.Location = new System.Drawing.Point(690, 83);
+			this.button7.Name = "button7";
+			this.button7.Size = new System.Drawing.Size(181, 57);
+			this.button7.TabIndex = 16;
+			this.button7.Text = "Save";
+			this.button7.UseVisualStyleBackColor = false;
+			this.button7.Click += new System.EventHandler(this.saveBtn_Click);
+			// 
+			// button1
+			// 
+			this.button1.BackColor = System.Drawing.SystemColors.MenuHighlight;
+			this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.button1.ForeColor = System.Drawing.Color.White;
+			this.button1.Location = new System.Drawing.Point(325, 35);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(181, 57);
+			this.button1.TabIndex = 19;
+			this.button1.Text = "Query";
+			this.button1.UseVisualStyleBackColor = false;
+			this.button1.Click += new System.EventHandler(this.executeQueryBtn_Click);
+			// 
 			// DatabaseView
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1764, 799);
+			this.Controls.Add(this.button6);
+			this.Controls.Add(this.button5);
+			this.Controls.Add(this.button7);
 			this.Controls.Add(this.queryPanel);
-			this.Controls.Add(this.button3);
-			this.Controls.Add(this.button1);
 			this.Controls.Add(this.tableData);
-			this.Controls.Add(this.button2);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.tableComboBox);
 			this.Name = "DatabaseView";
@@ -179,14 +191,14 @@
 
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.ComboBox tableComboBox;
-		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.DataGridView tableData;
-		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.Button button3;
-		private System.Windows.Forms.Button button4;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.TextBox queryBox;
 		private System.Windows.Forms.Panel queryPanel;
 		private System.Windows.Forms.Label timeLabel;
+		private System.Windows.Forms.Button button6;
+		private System.Windows.Forms.Button button5;
+		private System.Windows.Forms.Button button7;
+		private System.Windows.Forms.Button button1;
 	}
 }

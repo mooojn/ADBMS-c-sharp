@@ -30,9 +30,11 @@
 		{
 			this.tableName = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
-			this.addCol = new System.Windows.Forms.Button();
 			this.columnsPanel = new System.Windows.Forms.Panel();
+			this.label2 = new System.Windows.Forms.Label();
+			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.createTable = new System.Windows.Forms.Button();
+			this.addCol = new System.Windows.Forms.Button();
 			this.columnsPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -53,33 +55,57 @@
 			this.label1.TabIndex = 4;
 			this.label1.Text = "Table Name";
 			// 
-			// addCol
-			// 
-			this.addCol.Location = new System.Drawing.Point(115, 140);
-			this.addCol.Name = "addCol";
-			this.addCol.Size = new System.Drawing.Size(181, 57);
-			this.addCol.TabIndex = 5;
-			this.addCol.Text = "Add Column";
-			this.addCol.UseVisualStyleBackColor = true;
-			this.addCol.Click += new System.EventHandler(this.addColumnButton_Click);
-			// 
 			// columnsPanel
 			// 
 			this.columnsPanel.Controls.Add(this.addCol);
+			this.columnsPanel.Controls.Add(this.textBox1);
+			this.columnsPanel.Controls.Add(this.label2);
 			this.columnsPanel.Location = new System.Drawing.Point(54, 33);
 			this.columnsPanel.Name = "columnsPanel";
 			this.columnsPanel.Size = new System.Drawing.Size(706, 934);
 			this.columnsPanel.TabIndex = 6;
 			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(0, 21);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(136, 25);
+			this.label2.TabIndex = 8;
+			this.label2.Text = "Primary Key*";
+			// 
+			// textBox1
+			// 
+			this.textBox1.Location = new System.Drawing.Point(161, 19);
+			this.textBox1.Name = "textBox1";
+			this.textBox1.Size = new System.Drawing.Size(294, 31);
+			this.textBox1.TabIndex = 8;
+			// 
 			// createTable
 			// 
-			this.createTable.Location = new System.Drawing.Point(831, 173);
+			this.createTable.BackColor = System.Drawing.Color.ForestGreen;
+			this.createTable.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.createTable.ForeColor = System.Drawing.Color.White;
+			this.createTable.Location = new System.Drawing.Point(822, 171);
 			this.createTable.Name = "createTable";
 			this.createTable.Size = new System.Drawing.Size(181, 57);
-			this.createTable.TabIndex = 7;
+			this.createTable.TabIndex = 8;
 			this.createTable.Text = "Create";
-			this.createTable.UseVisualStyleBackColor = true;
+			this.createTable.UseVisualStyleBackColor = false;
 			this.createTable.Click += new System.EventHandler(this.createTable_Click);
+			// 
+			// addCol
+			// 
+			this.addCol.BackColor = System.Drawing.SystemColors.MenuHighlight;
+			this.addCol.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.addCol.ForeColor = System.Drawing.Color.White;
+			this.addCol.Location = new System.Drawing.Point(161, 123);
+			this.addCol.Name = "addCol";
+			this.addCol.Size = new System.Drawing.Size(181, 57);
+			this.addCol.TabIndex = 14;
+			this.addCol.Text = "Add Column";
+			this.addCol.UseVisualStyleBackColor = false;
+			this.addCol.Click += new System.EventHandler(this.addColumnButton_Click);
 			// 
 			// TableView
 			// 
@@ -94,6 +120,7 @@
 			this.Text = "Table";
 			this.Load += new System.EventHandler(this.Table_Load);
 			this.columnsPanel.ResumeLayout(false);
+			this.columnsPanel.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -102,8 +129,10 @@
 		#endregion
 		private System.Windows.Forms.TextBox tableName;
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Button addCol;
 		private System.Windows.Forms.Panel columnsPanel;
+		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Button createTable;
+		private System.Windows.Forms.Button addCol;
 	}
 }
