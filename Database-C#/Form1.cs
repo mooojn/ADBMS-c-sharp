@@ -202,5 +202,52 @@ namespace Database_C_
 		{
 
 		}
+
+		private void button4_Click(object sender, EventArgs e)
+		{
+			openFileDialog1.ShowDialog();
+			string file = openFileDialog1.FileName;
+			string storeTo = Path.Combine(Vars.databasePath, Vars.selectedDb);
+
+			if (!File.Exists(file))
+			{
+				MessageBox.Show("The specified file does not exist.");
+				return;
+			}
+
+			if (!Directory.Exists(storeTo))
+			{
+				MessageBox.Show("The destination directory does not exist.");
+				return;
+			}
+
+			if(Path.GetExtension(file) != ".csv")
+			{
+				MessageBox.Show("The file should be of .csv format");
+				return;
+			}
+			string fileName = Path.GetFileName(file);
+			string destinationPath = Path.Combine(storeTo, fileName);
+
+			try
+			{
+				File.Copy(file, destinationPath, overwrite: true);
+				MessageBox.Show("File imported successfully.");
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Error copying file: " + ex.Message);
+			}
+		}
+
+		private void dbComboBox_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			SetSelectedDb();
+		}
+
+		private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
+		{
+
+		}
 	}
 }

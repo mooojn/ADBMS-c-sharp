@@ -19,18 +19,43 @@ namespace Database_C_
 {
     public partial class DatabaseView : Form
     {
-        public DatabaseView()
+		AutoCompleteStringCollection suggestions = new AutoCompleteStringCollection();
+        List<string> tables = new List<string>();
+		public DatabaseView()
         {
             InitializeComponent();
             if (Handler.isCSV)
                 queryPanel.Visible = true;
             else
                 queryPanel.Visible = false;
-        }
+		}
 
-        private void DatabaseView_Load(object sender, EventArgs e)
+		private void qeuryTextBoxSuggestions()
+		{
+			queryBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+			queryBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+			suggestions.Clear();
+
+            foreach(string table in tables)
+            {
+				string q2 = $"Insert Into {table} values()";
+                string q1 = $"Select * from {table}";
+                string q3 = $"Update {table} Set";
+				string q4 = $"Delete From {table} Where";
+				suggestions.Add(q1);
+				suggestions.Add(q2);
+				suggestions.Add(q3);
+				suggestions.Add(q4);
+			}
+			queryBox.AutoCompleteCustomSource = suggestions;
+		}
+
+
+		private void DatabaseView_Load(object sender, EventArgs e)
         {
-            string dbPath = Path.Combine(Vars.databasePath, Vars.selectedDb);
+
+			string dbPath = Path.Combine(Vars.databasePath, Vars.selectedDb);
             tableComboBox.Items.Clear();
 
             if (Directory.Exists(dbPath))
@@ -41,7 +66,9 @@ namespace Database_C_
 
                 foreach (string file in files)
                 {
-                    tableComboBox.Items.Add(Path.GetFileNameWithoutExtension(file));
+                    string f = Path.GetFileNameWithoutExtension(file);
+                    tableComboBox.Items.Add(f);
+                    tables.Add(f);
                 }
 
                 if (tableComboBox.Items.Count > 0)
@@ -51,7 +78,9 @@ namespace Database_C_
             {
                 MessageBox.Show("Database folder not found.");
             }
-        }
+
+			qeuryTextBoxSuggestions();
+		}
 
         private void tableComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -368,20 +397,40 @@ namespace Database_C_
         {
             // Empty unless needed
         }
+		List<string> queries = new List<string>();
 
 		private void executeQueryBtn_Click(object sender, EventArgs e)
 		{
+			if (string.IsNullOrWhiteSpace(queryBox.Text))
+			{
+				MessageBox.Show("Please enter a query.");
+				return;
+			}
+
+
 			Stopwatch stopwatch = new Stopwatch();
 			stopwatch.Start();
 
-			string query = queryBox.Text;
+			string query = queryBox.Text.Trim();
+
+			
+
+			// Add to history if not empty and not already in the list
+
+
 			bool isTableChanged = Parser.ParseQuery(query, tableData);
 
+			stopwatch.Stop();
+			timeLabel.Text = $"Time: {stopwatch.ElapsedMilliseconds} ms";
+
 			if (isTableChanged)
-			{
-				stopwatch.Stop();
-				timeLabel.Text = $"Time: {stopwatch.ElapsedMilliseconds} ms";
-				return;
+            {
+				if (!string.IsNullOrEmpty(query) && !queries.Contains(query))
+				{
+					queries.Add(query);
+					queryHistoryBox.Items.Add(query); // Assumes you have a ListBox or ComboBox named queryHistoryBox
+				}
+                return;
 			}
 
 			if (Handler.isCSV)
@@ -389,8 +438,7 @@ namespace Database_C_
 			else
 				LoadTableBIN();
 
-			//stopwatch.Stop();
-			//timeLabel.Text = $"Time: {stopwatch.ElapsedMilliseconds} ms";
+			
 		}
 
 		private void panel1_Paint(object sender, PaintEventArgs e)
@@ -402,5 +450,12 @@ namespace Database_C_
 		{
 
 		}
+
+		private void queryHistoryBox_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (queryHistoryBox.SelectedItem != null)
+				queryBox.Text = queryHistoryBox.SelectedItem.ToString();
+		}
+
 	}
 }

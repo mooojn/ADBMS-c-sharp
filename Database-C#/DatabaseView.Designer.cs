@@ -34,11 +34,13 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.queryBox = new System.Windows.Forms.TextBox();
 			this.queryPanel = new System.Windows.Forms.Panel();
+			this.button1 = new System.Windows.Forms.Button();
 			this.timeLabel = new System.Windows.Forms.Label();
 			this.button6 = new System.Windows.Forms.Button();
 			this.button5 = new System.Windows.Forms.Button();
 			this.button7 = new System.Windows.Forms.Button();
-			this.button1 = new System.Windows.Forms.Button();
+			this.queryHistoryBox = new System.Windows.Forms.ComboBox();
+			this.label3 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.tableData)).BeginInit();
 			this.queryPanel.SuspendLayout();
 			this.SuspendLayout();
@@ -64,11 +66,11 @@
 			// tableData
 			// 
 			this.tableData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.tableData.Location = new System.Drawing.Point(12, 299);
+			this.tableData.Location = new System.Drawing.Point(-21, 370);
 			this.tableData.Name = "tableData";
 			this.tableData.RowHeadersWidth = 82;
 			this.tableData.RowTemplate.Height = 33;
-			this.tableData.Size = new System.Drawing.Size(1497, 488);
+			this.tableData.Size = new System.Drawing.Size(1530, 578);
 			this.tableData.TabIndex = 9;
 			this.tableData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tableData_CellContentClick);
 			// 
@@ -91,15 +93,30 @@
 			// 
 			// queryPanel
 			// 
+			this.queryPanel.Controls.Add(this.label3);
+			this.queryPanel.Controls.Add(this.queryHistoryBox);
 			this.queryPanel.Controls.Add(this.button1);
 			this.queryPanel.Controls.Add(this.timeLabel);
 			this.queryPanel.Controls.Add(this.queryBox);
 			this.queryPanel.Controls.Add(this.label1);
 			this.queryPanel.Location = new System.Drawing.Point(161, 159);
 			this.queryPanel.Name = "queryPanel";
-			this.queryPanel.Size = new System.Drawing.Size(710, 134);
+			this.queryPanel.Size = new System.Drawing.Size(710, 181);
 			this.queryPanel.TabIndex = 15;
 			this.queryPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+			// 
+			// button1
+			// 
+			this.button1.BackColor = System.Drawing.SystemColors.MenuHighlight;
+			this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.button1.ForeColor = System.Drawing.Color.White;
+			this.button1.Location = new System.Drawing.Point(325, 35);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(181, 57);
+			this.button1.TabIndex = 19;
+			this.button1.Text = "Query";
+			this.button1.UseVisualStyleBackColor = false;
+			this.button1.Click += new System.EventHandler(this.executeQueryBtn_Click);
 			// 
 			// timeLabel
 			// 
@@ -151,24 +168,29 @@
 			this.button7.UseVisualStyleBackColor = false;
 			this.button7.Click += new System.EventHandler(this.saveBtn_Click);
 			// 
-			// button1
+			// queryHistoryBox
 			// 
-			this.button1.BackColor = System.Drawing.SystemColors.MenuHighlight;
-			this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.button1.ForeColor = System.Drawing.Color.White;
-			this.button1.Location = new System.Drawing.Point(325, 35);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(181, 57);
-			this.button1.TabIndex = 19;
-			this.button1.Text = "Query";
-			this.button1.UseVisualStyleBackColor = false;
-			this.button1.Click += new System.EventHandler(this.executeQueryBtn_Click);
+			this.queryHistoryBox.FormattingEnabled = true;
+			this.queryHistoryBox.Location = new System.Drawing.Point(10, 130);
+			this.queryHistoryBox.Name = "queryHistoryBox";
+			this.queryHistoryBox.Size = new System.Drawing.Size(282, 33);
+			this.queryHistoryBox.TabIndex = 19;
+			this.queryHistoryBox.SelectedIndexChanged += new System.EventHandler(this.queryHistoryBox_SelectedIndexChanged);
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(3, 93);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(177, 25);
+			this.label3.TabIndex = 20;
+			this.label3.Text = "Previous Queries";
 			// 
 			// DatabaseView
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1764, 799);
+			this.ClientSize = new System.Drawing.Size(1764, 903);
 			this.Controls.Add(this.button6);
 			this.Controls.Add(this.button5);
 			this.Controls.Add(this.button7);
@@ -200,5 +222,7 @@
 		private System.Windows.Forms.Button button5;
 		private System.Windows.Forms.Button button7;
 		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.ComboBox queryHistoryBox;
+		private System.Windows.Forms.Label label3;
 	}
 }
