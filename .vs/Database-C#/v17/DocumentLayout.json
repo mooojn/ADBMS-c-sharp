@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\XD GAMING\\Desktop\\ADBMSFinal\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|C:\\Users\\XD GAMING\\Desktop\\ADBMSFinal\\database-c#\\tableview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|c:\\users\\xd gaming\\desktop\\adbmsfinal\\database-c#\\tableview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|solutionrelative:database-c#\\tableview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -15,11 +15,11 @@
       "RelativeMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|solutionrelative:database-c#\\transactionsview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|c:\\users\\xd gaming\\desktop\\adbmsfinal\\database-c#\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|C:\\Users\\XD GAMING\\Desktop\\ADBMSFinal\\database-c#\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|solutionrelative:database-c#\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|c:\\users\\xd gaming\\desktop\\adbmsfinal\\database-c#\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|C:\\Users\\XD GAMING\\Desktop\\ADBMSFinal\\database-c#\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{B33D79AC-949E-4D26-964E-A1A3118DBD68}|Database-C#\\Database-C#.csproj|solutionrelative:database-c#\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -90,8 +90,7 @@
               "RelativeToolTip": "Database-C#\\Form1.cs",
               "ViewState": "AQIAAO8AAAAAAAAAAAAAAAEBAABgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-13T17:11:02.53Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-13T17:11:02.53Z"
             },
             {
               "$type": "Document",
@@ -102,8 +101,7 @@
               "ToolTip": "C:\\Users\\XD GAMING\\Desktop\\ADBMSFinal\\Database-C#\\Form1.cs [Design]",
               "RelativeToolTip": "Database-C#\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-13T17:11:01.669Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-05-13T17:11:01.669Z"
             },
             {
               "$type": "Document",
@@ -126,8 +124,7 @@
               "ToolTip": "C:\\Users\\XD GAMING\\Desktop\\ADBMSFinal\\Database-C#\\DatabaseView.cs [Design]",
               "RelativeToolTip": "Database-C#\\DatabaseView.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T12:13:50.148Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-04-20T12:13:50.148Z"
             },
             {
               "$type": "Document",
@@ -185,8 +182,7 @@
               "ToolTip": "C:\\Users\\XD GAMING\\Desktop\\ADBMSFinal\\Database-C#\\TransactionsView.cs [Design]",
               "RelativeToolTip": "Database-C#\\TransactionsView.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-26T11:31:49.693Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-04-26T11:31:49.693Z"
             },
             {
               "$type": "Document",
@@ -210,8 +206,7 @@
               "ToolTip": "C:\\Users\\XD GAMING\\Desktop\\ADBMSFinal\\Database-C#\\TransactionsView.cs",
               "RelativeToolTip": "Database-C#\\TransactionsView.cs",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-26T11:31:50.567Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-26T11:31:50.567Z"
             },
             {
               "$type": "Document",
@@ -258,8 +253,7 @@
               "ToolTip": "C:\\Users\\XD GAMING\\Desktop\\ADBMSFinal\\Database-C#\\TableView.Designer.cs",
               "RelativeToolTip": "Database-C#\\TableView.Designer.cs",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-07T11:40:22.971Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-07T11:40:22.971Z"
             },
             {
               "$type": "Document",
@@ -282,8 +276,7 @@
               "ToolTip": "C:\\Users\\XD GAMING\\Desktop\\ADBMSFinal\\Database-C#\\TransactionsView.Designer.cs",
               "RelativeToolTip": "Database-C#\\TransactionsView.Designer.cs",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-26T12:37:07.558Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-26T12:37:07.558Z"
             }
           ]
         }
