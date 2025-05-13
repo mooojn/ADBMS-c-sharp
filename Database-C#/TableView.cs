@@ -356,6 +356,85 @@ namespace Database_C_
                 MessageBox.Show(result);
             }
         }
+       
+        private void columnQuery_TextChanged(object sender, EventArgs e)
+        {
 
+        }
+
+        private void columnQuerybtn_Click(object sender, EventArgs e)
+        {
+            string query = columnQuery.Text.Trim();
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                MessageBox.Show("Please enter a query.");
+                return;
+            }
+
+            string[] tokens = query.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (tokens.Length < 4)
+            {
+                MessageBox.Show("Incomplete query.");
+                return;
+            }
+
+            string command = tokens[0].ToUpper();
+
+            try
+            {
+                switch (command)
+                {
+                    case "ADD":
+                        if (tokens.Length == 5 && tokens[1].ToUpper() == "COLUMN" && tokens[3].ToUpper() == "TO")
+                            ColumnHelpers.AddColumnToTable(tokens[2], tokens[4]);
+                        else
+                            MessageBox.Show("Invalid ADD COLUMN syntax.");
+                        break;
+
+                    case "DROP":
+                        if (tokens.Length == 5 && tokens[1].ToUpper() == "COLUMN" && tokens[3].ToUpper() == "FROM")
+                            ColumnHelpers.DropColumnFromTable(tokens[2], tokens[4]);
+                        else
+                            MessageBox.Show("Invalid DROP COLUMN syntax.");
+                        break;
+
+                    case "RENAME":
+                        if (tokens.Length == 7 && tokens[1].ToUpper() == "COLUMN" && tokens[3].ToUpper() == "TO" && tokens[5].ToUpper() == "IN")
+                            ColumnHelpers.RenameColumnInTable(tokens[2], tokens[4], tokens[6]);
+                        else
+                            MessageBox.Show("Invalid RENAME COLUMN syntax.");
+                        break;
+
+                    case "ALTER":
+                        if (tokens.Length == 7 && tokens[1].ToUpper() == "COLUMN" && tokens[3].ToUpper() == "TO" && tokens[5].ToUpper() == "IN")
+                            ColumnHelpers.RenameColumnInTable(tokens[2], tokens[4], tokens[6]);  
+                        else
+                            MessageBox.Show("Invalid ALTER COLUMN syntax.");
+                        break;
+
+                    case "SHOW":
+                
+                        if (tokens.Length == 4 && tokens[1].ToUpper() == "COLUMNS" && tokens[2].ToUpper() == "FROM")
+                            ColumnHelpers.ShowColumnsFromTable(tokens[3]);
+                        else
+                            MessageBox.Show("Invalid SHOW COLUMNS syntax.");
+                        break;
+
+                    default:
+                        MessageBox.Show("Unsupported query.");
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void columnsPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
