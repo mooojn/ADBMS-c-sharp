@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Database_C_.models
 {
-	[Serializable]  // Mark the class as serializable
+	[Serializable]  
 	internal class TableRow
 	{
 		public List<string> Columns { get; set; }

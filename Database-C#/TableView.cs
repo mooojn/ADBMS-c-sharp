@@ -372,7 +372,6 @@ namespace Database_C_
             }
 
             string[] tokens = query.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            MessageBox.Show(tokens.Length.ToString());
             if (tokens.Length < 3)
             {
                 MessageBox.Show("Incomplete query.");
