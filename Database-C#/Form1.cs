@@ -239,8 +239,147 @@ namespace Database_C_
 				MessageBox.Show("Error copying file: " + ex.Message);
 			}
 		}
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            string query = queryBox.Text;
+            ParseAndExecuteQuery(query);
+        }
 
-		private void dbComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void ParseAndExecuteQuery(string query)
+        {
+            query = query.Trim();
+
+            if (string.IsNullOrEmpty(query))
+            {
+                MessageBox.Show("Query is empty.");
+                return;
+            }
+
+            string[] tokens = query.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (tokens.Length < 2)
+            {
+                MessageBox.Show("Invalid query format.");
+                return;
+            }
+
+            string command = tokens[0].ToUpper();
+            string type = tokens[1].ToUpper();
+
+            switch (command)
+            {
+                case "CREATE":
+                    if (type == "DATABASE" && tokens.Length == 3)
+                    {
+                        string dbName = tokens[2];
+                        string path = Path.Combine(Vars.databasePath, dbName);
+
+                        if (!Directory.Exists(path))
+                        {
+                            Directory.CreateDirectory(path);
+                            MessageBox.Show($"Database '{dbName}' created.");
+                            LoadDatabasesToComboBox();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Database already exists.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid CREATE syntax.");
+                    }
+                    break;
+
+                case "DROP":
+                    if (type == "DATABASE" && tokens.Length == 3)
+                    {
+                        string dbName = tokens[2];
+                        string path = Path.Combine(Vars.databasePath, dbName);
+
+                        if (Directory.Exists(path))
+                        {
+                            Directory.Delete(path, true);
+                            MessageBox.Show($"Database '{dbName}' deleted.");
+                            LoadDatabasesToComboBox();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Database does not exist.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid DROP syntax.");
+                    }
+                    break;
+
+                case "USE":
+                    if (type != "DATABASE" && tokens.Length == 2)
+                    {
+                        string dbName = tokens[1];
+                        string path = Path.Combine(Vars.databasePath, dbName);
+
+                        if (Directory.Exists(path))
+                        {
+                            Vars.selectedDb = dbName;
+                            MessageBox.Show($"Switched to database '{dbName}'.");
+
+                            LoadDatabasesToComboBox();
+                            dbComboBox.SelectedItem = dbName;
+                            TableView tableView = new TableView();
+                            tableView.Show();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Database does not exist.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid USE syntax.");
+                    }
+                    break;
+
+                case "MODIFY":
+                    if (type == "DATABASE" && tokens.Length == 5 && tokens[3].ToUpper() == "TO")
+                    {
+                        string oldName = tokens[2];
+                        string newName = tokens[4];
+                        string oldPath = Path.Combine(Vars.databasePath, oldName);
+                        string newPath = Path.Combine(Vars.databasePath, newName);
+
+                        if (Directory.Exists(oldPath))
+                        {
+                            if (!Directory.Exists(newPath))
+                            {
+                                Directory.Move(oldPath, newPath);
+                                MessageBox.Show($"Database renamed from '{oldName}' to '{newName}'.");
+                                LoadDatabasesToComboBox();
+                            }
+                            else
+                            {
+                                MessageBox.Show("New database name already exists.");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Original database does not exist.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid MODIFY syntax.");
+                    }
+                    break;
+
+                default:
+                    MessageBox.Show("Unsupported query command.");
+                    break;
+            }
+        }
+
+        private void dbComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			SetSelectedDb();
 		}
@@ -249,5 +388,11 @@ namespace Database_C_
 		{
 
 		}
-	}
+
+        private void queryBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+    }
 }

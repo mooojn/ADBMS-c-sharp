@@ -25,3 +25,17 @@ E:\semester 4\ADBMS\proj\ADBMS-c-sharp\Database-C#\obj\Debug\Database-C#.pdb
 C:\Users\moon\Desktop\Database-C#\Database-C#\obj\Debug\Database_C_.TransactionsView.resources
 E:\semester 4\ADBMS\proj\ADBMS-c-sharp\Database-C#\obj\Debug\Database_C_.TransactionsView.resources
 C:\Users\moon\Desktop\Database-C#\Database-C#\obj\Debug\Database_C_.Ui_elements.resources
+C:\Users\XD GAMING\Desktop\ADBMSFinal\Database-C#\bin\Debug\Database-C#.exe.config
+C:\Users\XD GAMING\Desktop\ADBMSFinal\Database-C#\bin\Debug\Database-C#.exe
+C:\Users\XD GAMING\Desktop\ADBMSFinal\Database-C#\bin\Debug\Database-C#.pdb
+C:\Users\XD GAMING\Desktop\ADBMSFinal\Database-C#\obj\Debug\Database-C#.csproj.AssemblyReference.cache
+C:\Users\XD GAMING\Desktop\ADBMSFinal\Database-C#\obj\Debug\Database_C_.DatabaseView.resources
+C:\Users\XD GAMING\Desktop\ADBMSFinal\Database-C#\obj\Debug\Database_C_.Form1.resources
+C:\Users\XD GAMING\Desktop\ADBMSFinal\Database-C#\obj\Debug\Database_C_.Properties.Resources.resources
+C:\Users\XD GAMING\Desktop\ADBMSFinal\Database-C#\obj\Debug\Database_C_.TableView.resources
+C:\Users\XD GAMING\Desktop\ADBMSFinal\Database-C#\obj\Debug\Database_C_.TransactionsView.resources
+C:\Users\XD GAMING\Desktop\ADBMSFinal\Database-C#\obj\Debug\Database_C_.Ui_elements.resources
+C:\Users\XD GAMING\Desktop\ADBMSFinal\Database-C#\obj\Debug\Database-C#.csproj.GenerateResource.cache
+C:\Users\XD GAMING\Desktop\ADBMSFinal\Database-C#\obj\Debug\Database-C#.csproj.CoreCompileInputs.cache
+C:\Users\XD GAMING\Desktop\ADBMSFinal\Database-C#\obj\Debug\Database-C#.exe
+C:\Users\XD GAMING\Desktop\ADBMSFinal\Database-C#\obj\Debug\Database-C#.pdb
