@@ -30,29 +30,37 @@ namespace Database_C_
                 queryPanel.Visible = false;
 		}
 
-		private void qeuryTextBoxSuggestions()
-		{
-			queryBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-			queryBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+        private void qeuryTextBoxSuggestions()
+        {
+            queryBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            queryBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
-			suggestions.Clear();
+            suggestions.Clear();
 
-            foreach(string table in tables)
+            foreach (string table in tables)
             {
-				string q2 = $"Insert Into {table} values()";
                 string q1 = $"Select * from {table}";
+                string q2 = $"Insert Into {table} values()";
                 string q3 = $"Update {table} Set";
-				string q4 = $"Delete From {table} Where";
-				suggestions.Add(q1);
-				suggestions.Add(q2);
-				suggestions.Add(q3);
-				suggestions.Add(q4);
-			}
-			queryBox.AutoCompleteCustomSource = suggestions;
-		}
+                string q4 = $"Delete From {table} Where";
+
+                string q5 = $"Select SUM() from {table}";
+                string q6 = $"Select AVG() from {table}";
+                string q7 = $"Select COUNT() from {table}";
+
+                suggestions.Add(q1);
+                suggestions.Add(q2);
+                suggestions.Add(q3);
+                suggestions.Add(q4);
+                suggestions.Add(q5);
+                suggestions.Add(q6);
+                suggestions.Add(q7);
+            }
+            queryBox.AutoCompleteCustomSource = suggestions;
+        }
 
 
-		private void DatabaseView_Load(object sender, EventArgs e)
+        private void DatabaseView_Load(object sender, EventArgs e)
         {
 
 			string dbPath = Path.Combine(Vars.databasePath, Vars.selectedDb);
