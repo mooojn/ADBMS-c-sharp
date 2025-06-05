@@ -10,5 +10,6 @@ namespace Database_C_.Utils
 	{
 		public static string databasePath = "../../database/";
 		public static string selectedDb = "";
+		public static string backupPath = "../../../";
 	}
 }

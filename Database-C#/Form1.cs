@@ -394,5 +394,92 @@ namespace Database_C_
 
         }
 
-    }
+		private void button8_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				string sourceRoot = Vars.databasePath;
+				string backupRoot = Path.Combine(Vars.backupPath, "Backups");
+				string backupPath = Path.Combine(backupRoot, "Backup");
+
+				// Delete previous backup
+				if (Directory.Exists(backupPath))
+					Directory.Delete(backupPath, true);
+
+				Directory.CreateDirectory(backupPath);
+
+				// Copy each database folder
+				foreach (var dbFolder in Directory.GetDirectories(sourceRoot))
+				{
+					string dbName = Path.GetFileName(dbFolder);
+					if (dbName.Equals("Backups", StringComparison.OrdinalIgnoreCase)) continue;
+
+					string targetDbFolder = Path.Combine(backupPath, dbName);
+					CopyDirectory(dbFolder, targetDbFolder);
+				}
+
+				MessageBox.Show("Backup completed successfully!\nSaved at:\n" + backupPath);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Backup failed:\n" + ex.Message);
+			}
+		}
+
+
+		// Recursively copy folders and files
+		private void CopyDirectory(string sourceDir, string destinationDir)
+		{
+			Directory.CreateDirectory(destinationDir);
+
+			foreach (var file in Directory.GetFiles(sourceDir))
+			{
+				string destFile = Path.Combine(destinationDir, Path.GetFileName(file));
+				File.Copy(file, destFile, true);
+			}
+
+			foreach (var dir in Directory.GetDirectories(sourceDir))
+			{
+				string destSubDir = Path.Combine(destinationDir, Path.GetFileName(dir));
+				CopyDirectory(dir, destSubDir);
+			}
+		}
+
+		private void button9_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				string sourceRoot = Vars.databasePath;
+				string backupPath = Path.Combine(Vars.backupPath, "Backups", "Backup");
+
+				if (!Directory.Exists(backupPath))
+				{
+					MessageBox.Show("No backup found to restore.");
+					return;
+				}
+
+				// Delete current database folders
+				foreach (var dir in Directory.GetDirectories(sourceRoot))
+				{
+					Directory.Delete(dir, true);
+				}
+
+				// Copy backup contents to main db path
+				foreach (var dir in Directory.GetDirectories(backupPath))
+				{
+					string dbName = Path.GetFileName(dir);
+					string targetPath = Path.Combine(sourceRoot, dbName);
+					CopyDirectory(dir, targetPath);
+				}
+
+				MessageBox.Show("Database restored successfully.");
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Restore failed:\n" + ex.Message);
+			}
+		}
+
+
+	}
 }

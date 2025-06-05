@@ -39,3 +39,17 @@ C:\Users\XD GAMING\Desktop\ADBMSFinal\Database-C#\obj\Debug\Database-C#.csproj.G
 C:\Users\XD GAMING\Desktop\ADBMSFinal\Database-C#\obj\Debug\Database-C#.csproj.CoreCompileInputs.cache
 C:\Users\XD GAMING\Desktop\ADBMSFinal\Database-C#\obj\Debug\Database-C#.exe
 C:\Users\XD GAMING\Desktop\ADBMSFinal\Database-C#\obj\Debug\Database-C#.pdb
+C:\Users\moon\Downloads\ADBMS-c-sharp-main\Database-C#\bin\Debug\Database-C#.exe.config
+C:\Users\moon\Downloads\ADBMS-c-sharp-main\Database-C#\bin\Debug\Database-C#.exe
+C:\Users\moon\Downloads\ADBMS-c-sharp-main\Database-C#\bin\Debug\Database-C#.pdb
+C:\Users\moon\Downloads\ADBMS-c-sharp-main\Database-C#\obj\Debug\Database-C#.csproj.AssemblyReference.cache
+C:\Users\moon\Downloads\ADBMS-c-sharp-main\Database-C#\obj\Debug\Database_C_.DatabaseView.resources
+C:\Users\moon\Downloads\ADBMS-c-sharp-main\Database-C#\obj\Debug\Database_C_.Form1.resources
+C:\Users\moon\Downloads\ADBMS-c-sharp-main\Database-C#\obj\Debug\Database_C_.Properties.Resources.resources
+C:\Users\moon\Downloads\ADBMS-c-sharp-main\Database-C#\obj\Debug\Database_C_.TableView.resources
+C:\Users\moon\Downloads\ADBMS-c-sharp-main\Database-C#\obj\Debug\Database_C_.TransactionsView.resources
+C:\Users\moon\Downloads\ADBMS-c-sharp-main\Database-C#\obj\Debug\Database_C_.Ui_elements.resources
+C:\Users\moon\Downloads\ADBMS-c-sharp-main\Database-C#\obj\Debug\Database-C#.csproj.GenerateResource.cache
+C:\Users\moon\Downloads\ADBMS-c-sharp-main\Database-C#\obj\Debug\Database-C#.csproj.CoreCompileInputs.cache
+C:\Users\moon\Downloads\ADBMS-c-sharp-main\Database-C#\obj\Debug\Database-C#.exe
+C:\Users\moon\Downloads\ADBMS-c-sharp-main\Database-C#\obj\Debug\Database-C#.pdb
